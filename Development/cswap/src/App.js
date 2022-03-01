@@ -1,15 +1,17 @@
-import React from 'react';
-import {BrowserRouter as Router} from 'react-router-dom';
-import Layout from './components/layout/Layout';
+import React from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Login from './components/Login.js'
 
 function App() {
   return (
-    <Router>
-      <Layout>
-        <h1>Hello World</h1>
-      </Layout>
-    </Router>
-  );
+    <div className="App">
+      <Router>
+        <Routes>
+          <Route exact path="/" component={Login} />
+        </Routes>
+      </Router>
+    </div>
+  )
 }
 
-export default App;
+export default App
