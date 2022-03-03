@@ -1,7 +1,7 @@
-import React from "react";
-import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router";
-import { useUserAuth } from "../context/UserAuthContext";
+import React from 'react';
+import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router';
+import { useUserAuth } from '../context/UserAuthContext';
 
 const Home = () => {
   const { logOut, user } = useUserAuth();
@@ -9,7 +9,7 @@ const Home = () => {
   const handleLogout = async () => {
     try {
       await logOut();
-      navigate("/");
+      navigate('/');
     } catch (error) {
       console.log(error.message);
     }

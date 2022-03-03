@@ -1,45 +1,45 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Form, Alert } from "react-bootstrap";
-import { Button } from "react-bootstrap";
-import GoogleButton from "react-google-button";
-import { useUserAuth } from "../context/UserAuthContext";
-import "./Login.css";
-import {FaFacebookSquare} from "react-icons/fa";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Form, Alert } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import GoogleButton from 'react-google-button';
+import { useUserAuth } from '../context/UserAuthContext';
+import './Login.css';
+import { FaFacebookSquare } from 'react-icons/fa';
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const {logIn, googleSignIn, facebookSignIn} = useUserAuth();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const { logIn, googleSignIn, facebookSignIn } = useUserAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    setError("");
+    setError('');
     try {
       await logIn(email, password);
-      navigate("/home");
+      navigate('/home');
     } catch (err) {
       setError(err.message);
     }
   };
 
-  const handleGoogleSignIn = async (e) => {
+  const handleGoogleSignIn = async e => {
     e.preventDefault();
     try {
       await googleSignIn();
-      navigate("/home");
+      navigate('/home');
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  const handleFacebookSignIn = async (e) => {
+  const handleFacebookSignIn = async e => {
     e.preventDefault();
     try {
       await facebookSignIn();
-      navigate("/home");
+      navigate('/home');
     } catch (error) {
       console.log(error.message);
     }
@@ -55,7 +55,7 @@ const Login = () => {
             <Form.Control
               type="email"
               placeholder="Email address"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
             />
           </Form.Group>
 
@@ -63,7 +63,7 @@ const Login = () => {
             <Form.Control
               type="password"
               placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={e => setPassword(e.target.value)}
             />
           </Form.Group>
 
@@ -83,7 +83,9 @@ const Login = () => {
         </div>
         <div>
           <Button onClick={handleFacebookSignIn} className="f-btn">
-          <pre><FaFacebookSquare size={30}/>       Facebook</pre>
+            <pre>
+              <FaFacebookSquare size={30} /> Facebook
+            </pre>
           </Button>
         </div>
         {/* <div className="f-btn-pic" style={{color: 'black'}} onClick={handleFacebookSignIn}>

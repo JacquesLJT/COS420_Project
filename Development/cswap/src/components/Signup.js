@@ -1,22 +1,23 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Form, Alert } from "react-bootstrap";
-import { Button } from "react-bootstrap";
-import { useUserAuth } from "../context/UserAuthContext";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Form, Alert } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import { useUserAuth } from '../context/UserAuthContext';
+import ReCaptchaV2 from 'react-google-recaptcha';
 
 const Signup = () => {
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [password, setPassword] = useState('');
   const { signUp } = useUserAuth();
   let navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    setError("");
+    setError('');
     try {
       await signUp(email, password);
-      navigate("/");
+      navigate('/');
     } catch (err) {
       setError(err.message);
     }
@@ -24,6 +25,11 @@ const Signup = () => {
 
   return (
     <>
+      <script
+        src="https://www.google.com/recaptcha/api.js"
+        async
+        defer
+      ></script>
       <div className="p-4 box">
         <h2 className="mb-3">CSwap Signup</h2>
         {error && <Alert variant="danger">{error}</Alert>}
@@ -32,7 +38,7 @@ const Signup = () => {
             <Form.Control
               type="email"
               placeholder="Email address"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={e => setEmail(e.target.value)}
             />
           </Form.Group>
 
@@ -40,7 +46,7 @@ const Signup = () => {
             <Form.Control
               type="password"
               placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={e => setPassword(e.target.value)}
             />
           </Form.Group>
 
@@ -49,6 +55,10 @@ const Signup = () => {
               Sign up
             </Button>
           </div>
+          <br />
+          <center>
+            <ReCaptchaV2 sitekey="6Lev364eAAAAAATr86taI5SQXVmuoctviwTvv-hS" />
+          </center>
         </Form>
       </div>
       <div className="p-4 box mt-3 text-center">
