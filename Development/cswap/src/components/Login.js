@@ -5,12 +5,13 @@ import { Button } from "react-bootstrap";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from "../context/UserAuthContext";
 import "./Login.css";
+import {FaFacebookSquare} from "react-icons/fa";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { logIn, googleSignIn } = useUserAuth();
+  const {logIn, googleSignIn, facebookSignIn} = useUserAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -28,6 +29,16 @@ const Login = () => {
     e.preventDefault();
     try {
       await googleSignIn();
+      navigate("/home");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const handleFacebookSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      await facebookSignIn();
       navigate("/home");
     } catch (error) {
       console.log(error.message);
@@ -70,6 +81,14 @@ const Login = () => {
             onClick={handleGoogleSignIn}
           />
         </div>
+        <div>
+          <Button onClick={handleFacebookSignIn} className="f-btn">
+          <pre><FaFacebookSquare size={30}/>       Facebook</pre>
+          </Button>
+        </div>
+        {/* <div className="f-btn-pic" style={{color: 'black'}} onClick={handleFacebookSignIn}>
+          <FaFacebookSquare size={40}/>
+        </div> */}
       </div>
       <div className="p-4 box mt-3 text-center">
         Don't have an account? <Link to="/signup">Sign up</Link>
