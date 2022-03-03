@@ -81,16 +81,14 @@ const Login = () => {
             onClick={handleGoogleSignIn}
           />
         </div>
-        <div>
-          <Button onClick={handleFacebookSignIn} className="f-btn">
-            <pre>
-              <FaFacebookSquare size={30} /> Facebook
+        <div className='fb-div'>
+          <Button onClick={handleFacebookSignIn} className="fb-btn">
+            <pre className="fb-sqr">
+              <FaFacebookSquare size={25}/>
+              <text className='fb-btn-text'>Facebook</text>
             </pre>
           </Button>
         </div>
-        {/* <div className="f-btn-pic" style={{color: 'black'}} onClick={handleFacebookSignIn}>
-          <FaFacebookSquare size={40}/>
-        </div> */}
       </div>
       <div className="p-4 box mt-3 text-center">
         Don't have an account? <Link to="/signup">Sign up</Link>

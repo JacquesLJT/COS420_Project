@@ -26,19 +26,20 @@ body {
   height: 38px !important;
 }
 
-.f-btn {
-  width: 100% !important;
-  height: 40px !important;
-  font-size: 25px !important;
-  margin-top: 15px;
-}
-.f-btn > div,
-.f-btn > div > svg {
-  width: 40px !important;
-  height: 38px !important;
+.fb-div {
+  padding-top: 10px;
 }
 
-.f-btn-pic {
-  position: relative;
-  bottom: 40px;
+.fb-btn {
+  height: 40px !important;
+  width: 100%;
+}
+
+.fb-sqr {
+  padding-right: 20px;
+  padding-bottom: 0;
+}
+
+.fb-btn-text {
+  padding-left: 10px;
 }
