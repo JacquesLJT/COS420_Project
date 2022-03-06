@@ -1,3 +1,7 @@
-.mb-3 {
-  text-align: center;
+.atsign {
+  display: inline-block;
+}
+
+.email {
+  display: inline-block;
 }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Form, Alert } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
+import { Form, Alert, Button } from 'react-bootstrap';
 import GoogleButton from 'react-google-button';
 import { useUserAuth } from '../context/UserAuthContext';
 import './Login.css';
@@ -85,7 +84,7 @@ const Login = () => {
           <Button onClick={handleFacebookSignIn} className="fb-btn">
             <pre className="fb-sqr">
               <FaFacebookSquare size={25}/>
-              <text className='fb-btn-text'>Facebook</text>
+              <text className='fb-btn-text'>Sign in with Facebook</text>
             </pre>
           </Button>
         </div>
