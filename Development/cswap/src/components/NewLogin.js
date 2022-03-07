@@ -59,7 +59,7 @@ export default function NewLogin() {
     return (
         <Center h="100vh" bg="#013220">
             <Stack boxShadow="md" bg="whiteAlpha.900" p="20" rounded="md">
-                <Heading as="h1">CSwap Login.</Heading>
+                <Heading as="h1" textAlign="center">CSwap</Heading>
                 <Text fontSize="lg" color="gray.600">
                     Please log in with the data you entered during registration.
                 </Text>
@@ -100,12 +100,12 @@ export default function NewLogin() {
                                 <Checkbox colorScheme="green">Keep me logged in</Checkbox>
                                 <Button
                                     isLoading={isSubmitting}
-                                    loadingText="Whisperning to our servers..."
+                                    loadingText="Whispering to our servers..."
                                     size="lg"
                                     colorScheme="green"
                                     type="submit"
                                 >
-                                    Login
+                                    Sign in
                                 </Button>
                                 <GoogleButton
                                     className='g-btn'
