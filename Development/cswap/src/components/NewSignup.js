@@ -107,6 +107,7 @@ const NewSignup = () => {
                                     size="lg"
                                     colorScheme="green"
                                     type="submit"
+                                    data-toggle="tooltip" data-placement="top" title="What're you waiting for? Sign up!"
                                 >
                                     Sign up
                                 </Button>

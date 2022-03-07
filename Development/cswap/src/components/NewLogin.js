@@ -8,7 +8,8 @@ import {
     Input, 
     InputLeftAddon, 
     InputGroup,
-    Alert
+    Alert,
+    Image
 } from '@chakra-ui/react';
 import React, {useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -57,11 +58,14 @@ export default function NewLogin() {
 
     return (
         <Center h="100vh" bg="#013220">
-            <Stack boxShadow="md" bg="whiteAlpha.900" p="20" rounded="md">
-                <Heading as="h1" textAlign="center">CSwap</Heading>
-                <Text fontSize="lg" color="gray.600">
-                    Please log in with the data you entered during registration.
-                </Text>
+            <Stack boxShadow="md" bg="whiteAlpha.900" p='20' rounded="md">
+            <Center><Image
+                  mt={-75}
+                  mb={-15}
+                  width='200px'
+                  src='CSwapLogo.png'
+                  alt='CSwap'
+                /></Center>
                 {error && <Alert status='error'>{error}</Alert>}
 
                 <Formik
@@ -137,8 +141,8 @@ export default function NewLogin() {
                     )}
                 </Formik>
 
-                <Stack justify="center" color="gray.600" spacing="3">
-                    <Text as="div" textAlign="center">
+                <Stack justify="center" color="gray.600" spacing="1">
+                    <Text as="div" textAlign="center" mb={-1} pt={0}>
                         <span>Don&lsquo;t have an account? </span>
                         <Button colorScheme="green" variant="link">
                             <Link to="/signup">Sign up</Link>
@@ -147,7 +151,6 @@ export default function NewLogin() {
                     <Button colorScheme="green" variant="link">
                         Forgot password?
                     </Button>
-
                 </Stack>
             </Stack>
         </Center>
