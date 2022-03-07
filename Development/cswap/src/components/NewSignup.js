@@ -44,10 +44,7 @@ const NewSignup = () => {
     return (
         <Center h="100vh" bg="#013220">
             <Stack boxShadow="md" bg="whiteAlpha.900" p="20" rounded="md">
-                <Heading as="h1">Sign up for CSwap.</Heading>
-                <Text fontSize="lg" color="gray.600">
-                    Please complete the following to register.
-                </Text>
+                <Heading as="h1">Sign up for CSwap</Heading>
                 {error && <Alert status="error">{error}</Alert>}
 
                 <Formik
@@ -63,9 +60,13 @@ const NewSignup = () => {
                         <Form onSubmit={handleSubmit}>
                             <Stack my="4" spacing="6">
                                 <InputGroup>
-                                    <InputLeftAddon children={<AtSignIcon />} />
+                                    <InputLeftAddon borderColor='gray.300' boxShadow='4px 3px 5px #ccc9c6' children={<AtSignIcon />} />
                                     <Input
                                         className='email'
+                                        borderColor='gray.300'
+                                        borderWidth='1px'
+                                        boxShadow='4px 3px 5px #ccc9c6'
+                                        variant='filled'
                                         name='email'
                                         type='email'
                                         placeholder='Email'
@@ -73,9 +74,13 @@ const NewSignup = () => {
                                     />
                                 </InputGroup>
                                 <InputGroup>
-                                    <InputLeftAddon children={<LockIcon />} />
+                                    <InputLeftAddon borderColor='gray.300' boxShadow='4px 3px 5px #ccc9c6' children={<LockIcon />} />
                                     <Input
                                         className='password'
+                                        borderColor='gray.300'
+                                        borderWidth='1px'
+                                        boxShadow='4px 3px 5px #ccc9c6'
+                                        variant='filled'
                                         name='password'
                                         type='password'
                                         placeholder='Password'
@@ -83,9 +88,13 @@ const NewSignup = () => {
                                     />
                                 </InputGroup>
                                 <InputGroup>
-                                    <InputLeftAddon children={<LockIcon />} />
+                                    <InputLeftAddon borderColor='gray.300' boxShadow='4px 3px 5px #ccc9c6' children={<LockIcon />} />
                                     <Input
                                         className='password'
+                                        borderColor='gray.300'
+                                        borderWidth='1px'
+                                        boxShadow='4px 3px 5px #ccc9c6'
+                                        variant='filled'
                                         name='password'
                                         type='password'
                                         placeholder='Confirm Password'
@@ -113,7 +122,7 @@ const NewSignup = () => {
                         <Text as="div" textAlign="center">
                             <span>Already have an account? </span>
                             <Button colorScheme="green" variant="link">
-                                <Link to="/">Log in</Link>
+                                <Link to="/">Sign in</Link>
                             </Button>
                         </Text>
                 </Stack>
