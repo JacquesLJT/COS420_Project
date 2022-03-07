@@ -14,9 +14,8 @@ import React, {useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import {AtSignIcon, LockIcon} from "@chakra-ui/icons";
-import GoogleButton from 'react-google-button';
 import { useUserAuth } from '../context/UserAuthContext';
-import { FaFacebookSquare } from 'react-icons/fa';
+import { FaFacebookSquare, FaGoogle } from 'react-icons/fa';
 
 export default function NewLogin() {
     const [email, setEmail] = useState('');
@@ -107,11 +106,15 @@ export default function NewLogin() {
                                 >
                                     Login
                                 </Button>
-                                <GoogleButton
-                                    className='g-btn'
-                                    type='dark'
+                                <Button
+                                    className="g-btn"
+                                    size="lg"
+                                    colorScheme="blue"
                                     onClick={handleGoogleSignIn}
-                                />
+                                    leftIcon={<FaGoogle />}
+                                >
+                                    Login with Google
+                                </Button>
                                 <Button
                                     className='fb-btn'
                                     size='lg'
@@ -119,7 +122,7 @@ export default function NewLogin() {
                                     onClick={handleFacebookSignIn}
                                     leftIcon={<FaFacebookSquare size={40} />}
                                 >
-                                    Sign in with Facebook
+                                    Login with Facebook
                                 </Button>
                             </Stack>
                         </Form>
