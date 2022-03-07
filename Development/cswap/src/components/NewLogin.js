@@ -128,7 +128,7 @@ export default function NewLogin() {
 
                 <Stack justify="center" color="gray.600" spacing="3">
                     <Text as="div" textAlign="center">
-                        <span>Don&lsquo;t have an account?</span>
+                        <span>Don&lsquo;t have an account? </span>
                         <Button colorScheme="green" variant="link">
                             <Link to="/signup">Sign up</Link>
                         </Button>
