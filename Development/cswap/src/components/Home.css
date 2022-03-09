@@ -1,0 +1,15 @@
+*{
+    margin: 0;
+    /* background-color: #013220; */
+  }
+  /* div{
+      background-color: #013220;
+  } */
+  .atsign {
+    display: inline-block;
+  }
+  
+  .email {
+    display: inline-block;
+  }
+  

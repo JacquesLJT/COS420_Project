@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { Formik, Form } from 'formik';
 import {AtSignIcon, LockIcon} from "@chakra-ui/icons";
+// import './Login.css';
 
 const NewSignup = () => {
   const [email, setEmail] = useState('');
