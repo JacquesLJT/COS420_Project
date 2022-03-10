@@ -1,27 +1,16 @@
 import { 
   Center,
-  Stack,
   Heading, 
-  Text, 
-  Button, 
-  Checkbox, 
-  Input, 
-  InputLeftAddon, 
-  InputGroup,
-  Alert,
-  Image,
   HStack
 } from '@chakra-ui/react';
 import React from 'react';
-import { Formik, Form } from 'formik';
-// import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import { useUserAuth } from '../context/UserAuthContext';
 // import Sidebar from './Sidebar';
 import Header from './Header';
 import './Home.css';
 import ProductCard from './ProductCard';
-import Sidebar from './Sidebar';
+//import Sidebar from './Sidebar';
 
 const Home = () => {
   const { logOut, user } = useUserAuth();
@@ -37,15 +26,38 @@ const Home = () => {
   return (
     <div>
       <Header/>
-      <HStack>
-        <Sidebar></Sidebar>
+      <Center mb='10'>
+        <Heading as={'h1'} size={'xl'} colorScheme="green" mt={110}>Home</Heading>
+      </Center>
+      <HStack justify="center" mb={10}>
         <ProductCard></ProductCard>
         <ProductCard></ProductCard>
         <ProductCard></ProductCard>
         <ProductCard></ProductCard>
         <ProductCard></ProductCard>
       </HStack>
-      </div>
+      <HStack justify="center" mb={10}>
+        <ProductCard></ProductCard>
+        <ProductCard></ProductCard>
+        <ProductCard></ProductCard>
+        <ProductCard></ProductCard>
+        <ProductCard></ProductCard>
+      </HStack>
+      <HStack justify="center" mb={10}>
+        <ProductCard></ProductCard>
+        <ProductCard></ProductCard>
+        <ProductCard></ProductCard>
+        <ProductCard></ProductCard>
+        <ProductCard></ProductCard>
+      </HStack>
+      <HStack justify="center" mb={10}>
+        <ProductCard></ProductCard>
+        <ProductCard></ProductCard>
+        <ProductCard></ProductCard>
+        <ProductCard></ProductCard>
+        <ProductCard></ProductCard>
+      </HStack>
+    </div>
   );
 };
 

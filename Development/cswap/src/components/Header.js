@@ -1,21 +1,11 @@
 import { 
-    Center,
-    Stack,
-    Heading, 
-    Text, 
-    Button, 
-    Checkbox, 
-    Input, 
-    Flex, 
-    HStack,
-    InputGroup,
-    Alert,
+    Button,
+    Flex,
     Image,
     Box
   } from '@chakra-ui/react';
 import React from 'react'
 import LogoutBtn from './LogoutBtn';
-import Sidebar from './Sidebar';
 
 function  Header () {
   return (
@@ -28,12 +18,70 @@ function  Header () {
             justify="space-between"
             w="100%"
             bg="white"
+            borderBottomWidth="2px"
+            borderBottomColor="green.800"
+            height={100}
+            position="fixed"
             >
-                <Box>
-                    <Text fontSize="lg" fontWeight="bold" bg="white"> CSwap</Text>
+                <Box 
+                    align="left" 
+                >
+                    <Image
+                        width='100px'
+                        src='CSwapLogo.png'
+                        alt='CSwap' 
+                        onClick={() => window.location.reload()}
+                        cursor="pointer"
+                    />
                 </Box>
+                <Flex
+                    mb={0}
+                    p={6}
+                    as="nav"
+                    align="center"
+                    justify="center"
+                    w="100%"
+                    bg="white"
+                >
+                    <Box
+                        ml={5}
+                        mr={5}
+                    >
+                        <Button variant="ghost" colorScheme="green">Home</Button>
+                    </Box>
+                    <Box
+                        ml={5}
+                        mr={5}
+                    >
+                        <Button variant="outline" colorScheme="green">Textbooks</Button>
+                    </Box>
+                    <Box
+                        ml={5}
+                        mr={5}
+                    >
+                        <Button>Apartment Rentals</Button>
+                    </Box>
+                    <Box
+                        ml={5}
+                        mr={5}
+                    >
+                        <Button>Electronics</Button>
+                    </Box>
+                    <Box
+                        ml={5}
+                        mr={5}
+                    >
+                        <Button>Furniture</Button>
+                    </Box>
+                    <Box
+                        ml={5}
+                        mr={5}
+                    >
+                        <Button>Appliances</Button>
+                    </Box>
+                </Flex>
                 <Box align="right">
-                    <LogoutBtn></LogoutBtn>
+                    <LogoutBtn/>
                 </Box> 
         </Flex>
     </div>
