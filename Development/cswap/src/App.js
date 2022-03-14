@@ -2,6 +2,8 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import NewLogin from './components/NewLogin';
 import NewSignup from './components/NewSignup';
+import CreateListing from './components/CreateListing';
+
 import ProtectedRoute from './components/ProtectedRoute';
 import { UserAuthContextProvider } from './context/UserAuthContext';
 import { ChakraProvider } from '@chakra-ui/react';
@@ -20,6 +22,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route path="/createListing" element={<CreateListing/>} />
               <Route path="/" element={<NewLogin />} />
               <Route path="/signup" element={<NewSignup />} />
             </Routes>
