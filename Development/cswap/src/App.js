@@ -22,7 +22,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              <Route path="/createListing" element={<CreateListing/>} />
+              <Route path="/createListing/*" element={<CreateListing/>} />
               <Route path="/" element={<NewLogin />} />
               <Route path="/signup" element={<NewSignup />} />
             </Routes>

@@ -18,110 +18,188 @@ import {
 import { ImBooks, ImHome3, ImMobile} from 'react-icons/im';
 import { GiCoffeeMug } from 'react-icons/gi';
 import {BiChair} from 'react-icons/bi';
-import { Routes, Route, Navigate, Link} from 'react-router-dom';
+import { Switch, Routes, Route, Navigate, Link,} from 'react-router-dom';
 import { useNavigate } from 'react-router';
 
 const textBookListing = () => {
-    // <Flex w="100%" justify={"center"}>
-                        
-    //                     <Stack>
-    //                         <Heading as={'h3'} size={'md'}>Item:</Heading>
-    //                         <Input/>
-    //                         <></>
-    //                     </Stack>
-    //                 </Flex>
-    //                 <Flex w="100%" justify={"center"}>
-    //                     <Stack>
-    //                         <Heading as={'h3'} size={'md'}>Title</Heading>
-    //                         <Input/>
-    //                     </Stack>
-    //                 </Flex>
-    //                 <Flex w="100%" justify={"center"}>
-    //                     <Stack>
-    //                         <Heading as={'h3'} size={'md'}>Title</Heading>
-    //                         <Input/>
-    //                     </Stack>
-    //                 </Flex>
 }
 function SelectProduct() {
     return (
-      <VStack mt="15" spacing="5" w="100%" > 
-          <Button 
-              leftIcon={<ImBooks />} 
-              boxShadow="lg" 
-              colorScheme="green" 
-              variant="outline">
-              TextBooks
-          </Button> 
-          <Button 
-              leftIcon={<ImHome3 />} 
-              boxShadow="lg" 
-              colorScheme="green" 
-              variant="outline">
-              Apartment Rentals</Button>   
-          <Button 
-              leftIcon={<ImMobile />}
-              boxShadow="lg" 
-              colorScheme="green" 
-              variant="outline">
-              Electronics    
-          </Button>
-          <Button 
-              leftIcon={<BiChair />} 
-              boxShadow="lg" 
-              colorScheme="green" 
-              variant="outline">
-              Furniture
-          </Button>
-          <Button 
-              leftIcon={<GiCoffeeMug />} 
-              boxShadow="lg" 
-              colorScheme="green" 
-              variant="outline">
-              Appliances
-          </Button>   
-      </VStack>
+        <Stack boxShadow="md" bg="whiteAlpha.900" p='10' rounded="md" w="50%" >  
+            <Center mb='10'>
+                        <Heading as={'h1'} size={'xl'} colorScheme="green">Create Listing</Heading>
+            </Center>
+            <HStack>
+                <Button colorScheme={"red"}>Cancel</Button>
+                    <VStack mt="15" spacing="5" w="100%" > 
+                    <Button 
+                        leftIcon={<ImBooks />} 
+                        boxShadow="lg" 
+                        colorScheme="green" 
+                        variant="outline">
+                        <Link to="textbook/">Texbooks</Link>
+                    </Button> 
+                    <Button 
+                        leftIcon={<ImHome3 />} 
+                        boxShadow="lg" 
+                        colorScheme="green" 
+                        variant="outline">
+                        <Link to="apartmentRentals/">Apartment Rentals</Link>
+                    </Button>   
+                    <Button 
+                        leftIcon={<ImMobile />}
+                        boxShadow="lg" 
+                        colorScheme="green" 
+                        variant="outline">
+                    <Link to="electronics/">Electronics</Link>   
+                    </Button>
+                    <Button 
+                        leftIcon={<BiChair />} 
+                        boxShadow="lg" 
+                        colorScheme="green" 
+                        variant="outline">
+                        <Link to="electronics/">Furniture</Link>
+                    </Button>
+                    <Button 
+                        leftIcon={<GiCoffeeMug />} 
+                        boxShadow="lg" 
+                        colorScheme="green" 
+                        variant="outline">
+                        <Link to="appliances/">Appliances</Link>
+                    </Button>   
+                </VStack>
+                <Button colorScheme={"green"}>Next</Button>
+            </HStack>
+        </Stack>
     )
 }
-const LoadTextBookForm = async e => {
-    const navigate = Navigate();
+const LoadTextBookForm = async () => {
+    const navigate = useNavigate();
     navigate("/textbook");
 };
 
 function TextBookForm() {
     return (
-        <>yoyo</>
+        <Stack boxShadow="md" bg="whiteAlpha.900" p='10' rounded="md" w="50%" >  
+             <Center mb='10'>
+                    <Heading as={'h1'} size={'xl'} colorScheme="green">Add Textbook</Heading>
+            </Center>
+            <HStack>
+                <Button colorScheme={"green"}>
+                    <Link to="/createListing">Back</Link> 
+                </Button>
+                <VStack spacing={5} p={10}>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                </VStack>
+                <Button colorScheme={"green"}>Next</Button>
+            </HStack>
+        </Stack>
     )
 }
 function ApartmentRentalsForm() {
     return (
-        <>yoyo</>
+        <Stack boxShadow="md" bg="whiteAlpha.900" p='10' rounded="md" w="50%" >  
+             <Center mb='10'>
+                    <Heading as={'h1'} size={'xl'} colorScheme="green">Add Apartment</Heading>
+            </Center>
+            <HStack>
+                <Button colorScheme={"green"}>
+                    <Link to="/createListing">Back</Link> 
+                </Button>
+                <VStack spacing={5} p={10}>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                </VStack>
+                <Button colorScheme={"green"}>Next</Button>
+            </HStack>
+        </Stack>
     )
 }
 function ElectronicsForm() {
     return (
-        <>yoyo</>
+        <Stack boxShadow="md" bg="whiteAlpha.900" p='10' rounded="md" w="50%" >  
+             <Center mb='10'>
+                    <Heading as={'h1'} size={'xl'} colorScheme="green">Add Electronic</Heading>
+            </Center>
+            <HStack>
+                <Button colorScheme={"green"}>
+                    <Link to="/createListing">Back</Link> 
+                </Button>
+                <VStack spacing={5} p={10}>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                </VStack>
+                <Button colorScheme={"green"}>Next</Button>
+            </HStack>
+        </Stack>
+    )
+}
+function FurnitureForm() {
+    return (
+        <Stack boxShadow="md" bg="whiteAlpha.900" p='10' rounded="md" w="50%" >  
+             <Center mb='10'>
+                    <Heading as={'h1'} size={'xl'} colorScheme="green">Add Furniture</Heading>
+            </Center>
+            <HStack>
+                <Button colorScheme={"green"}>
+                    <Link to="/createListing">Back</Link> 
+                </Button>
+                <VStack spacing={5} p={10}>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                </VStack>
+                <Button colorScheme={"green"}>Next</Button>
+            </HStack>
+        </Stack>
+    )
+}
+function AppliancesForm() {
+    return (
+        <Stack boxShadow="md" bg="whiteAlpha.900" p='10' rounded="md" w="50%" >  
+             <Center mb='10'>
+                    <Heading as={'h1'} size={'xl'} colorScheme="green">Add Appliance</Heading>
+            </Center>
+            <HStack>
+                <Button colorScheme={"green"}>
+                    <Link to="/createListing">Back</Link> 
+                </Button>
+                <VStack spacing={5} p={10}>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                    <Input borderColor="green" border ="2px"></Input>
+                </VStack>
+                <Button colorScheme={"green"}>Next</Button>
+            </HStack>
+        </Stack>
     )
 }
 
 function CreateListing() {
   return (
     <Center h="100vh" bg="#013220">
-        <Stack boxShadow="md" bg="whiteAlpha.900" p='10' rounded="md" w="50%" >  
-                <Center mb='10'>
-                    <Heading as={'h1'} size={'xl'} colorScheme="green">Create Listing</Heading>
-                </Center>
-            <HStack>
-                <Button colorScheme={"red"}>Cancel</Button>
-                <Routes>
-                    <Route path="/" element={<SelectProduct />} />
-                    <Route path="/textbook" element={<TextBookForm />} />
-                    <Route path="/apartmentRentals" element={<ApartmentRentalsForm />} />
-                    <Route path="/electronics" element={<ElectronicsForm />} />
-                </Routes>
-                <Button colorScheme={"green"}>Next</Button>
-            </HStack>
-        </Stack>
+        <Routes>
+            <Route path="/" element={<SelectProduct />} />
+            <Route path="/textbook" element={<TextBookForm />} />
+            <Route path="/apartmentRentals" element={<ApartmentRentalsForm />} />
+            <Route path="/electronics" element={<ElectronicsForm />} />
+            <Route path="/furniture" element={<FurnitureForm />} />
+            <Route path="/appliances" element={<AppliancesForm />} />
+        </Routes>
     </Center>
   )
 }
