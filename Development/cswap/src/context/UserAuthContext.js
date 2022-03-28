@@ -8,7 +8,15 @@ import {
   signInWithPopup,
   FacebookAuthProvider,
 } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import {
+  getFirestore,
+  query,
+  getDocs,
+  collection,
+  where,
+  addDoc,
+} from "firebase/firestore";
 
 const userAuthContext = createContext();
 
@@ -18,8 +26,21 @@ export function UserAuthContextProvider({ children }) {
   function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
   }
-  function signUp(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
+  
+  const signUp = async (email, password) =>{
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const user = res.user;
+      await addDoc(collection(db, "users"), {
+        userid: user.uid,
+        authProvider: "local",
+        email: email,
+      });
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+    // return createUserWithEmailAndPassword(auth, email, password);
   }
   function logOut() {
     return signOut(auth);
