@@ -6,8 +6,9 @@ import {
   } from '@chakra-ui/react';
 import React from 'react'
 import LogoutBtn from './LogoutBtn';
+import { Link } from 'react-router-dom';
 
-function  Header () {
+function  navbar () {
   return (
     <div> 
         <Flex
@@ -47,7 +48,7 @@ function  Header () {
                         ml={5}
                         mr={5}
                     >
-                        <Button variant="ghost" colorScheme="green">Home</Button>
+                        <Button variant="ghost" colorScheme="green" href="./Home">Home</Button>
                     </Box>
                     <Box
                         ml={5}
@@ -88,4 +89,4 @@ function  Header () {
    )
 }
  
-export default Header
+export default navbar
