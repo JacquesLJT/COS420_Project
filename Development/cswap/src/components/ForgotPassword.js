@@ -38,7 +38,7 @@ export default function ForgotPassword(){
 
         try {
             await resetPassword(email);
-            navigate('/');
+            navigate('../ForgotPasswordSubmit');
         } catch (err) {
             setError(err.message);
         }
@@ -109,6 +109,9 @@ export default function ForgotPassword(){
                     </Form>
                 )}
             </Formik>
+            <Button colorScheme="green" variant="link">
+                <Link to="/">Back to Login</Link>
+            </Button>
             </Stack>
 
         </Center>

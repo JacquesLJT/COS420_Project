@@ -4,6 +4,7 @@ import NewLogin from './components/NewLogin';
 import NewSignup from './components/NewSignup';
 import CreateListing from './components/CreateListing';
 import ForgotPassword from './components/ForgotPassword';
+import ForgotPasswordSubmit from './pages/ForgotPasswordSubmit';
 
 import ProtectedRoute from './components/ProtectedRoute';
 import { UserAuthContextProvider } from './context/UserAuthContext';
@@ -27,6 +28,7 @@ function App() {
               <Route path="/signup" element={<NewSignup />} />
               <Route path="/createListing/*" element={<CreateListing/>} />
               <Route path="/ForgotPassword" element={<ForgotPassword/>} />
+              <Route path="/ForgotPasswordSubmit" element={<ForgotPasswordSubmit/>} />
             </Routes>
           </UserAuthContextProvider>
     </ChakraProvider>
