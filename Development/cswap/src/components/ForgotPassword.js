@@ -1,10 +1,7 @@
 import {
     Center,
     Stack,
-    Heading,
-    Text,
     Button,
-    Checkbox,
     Input,
     InputLeftAddon,
     InputGroup,
@@ -14,7 +11,7 @@ import {
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form } from 'formik';
-import { AtSignIcon, LockIcon } from '@chakra-ui/icons';
+import { AtSignIcon } from '@chakra-ui/icons';
 import { useUserAuth } from '../context/UserAuthContext';
 
 export default function ForgotPassword(){
@@ -32,7 +29,7 @@ export default function ForgotPassword(){
         if (email !== confirmEmail) {
             return setError('Emails do not match');
         }
-        else if (email == '' || confirmEmail == '') {
+        else if (email === '' || confirmEmail === '') {
             return setError('Please enter your email');
         }
 

@@ -5,10 +5,9 @@ import ReCaptchaV2 from 'react-google-recaptcha';
 import {
   Center,
   Stack,
-  Heading,
   Text,
   Button,
-  Checkbox,
+  Image,
   Input,
   InputLeftAddon,
   InputGroup,
@@ -16,9 +15,9 @@ import {
 } from '@chakra-ui/react';
 import { Formik, Form } from 'formik';
 import {AtSignIcon, LockIcon} from "@chakra-ui/icons";
-// import './Login.css';
+import yup from 'yup';
 
-const NewSignup = () => {
+export default function NewSignup() {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [password, setPassword] = useState('');
@@ -40,22 +39,46 @@ const NewSignup = () => {
     } catch (err) {
         setError(err.message);
     }
+
+    const componentDidMount = () => {
+        const script = document.createElement("script");
+        script.src = "https://www.google.com/recaptcha/api.js";
+        script.async = true;
+        script.defer = true;
+        document.body.appendChild(script);
+    }
+
   };
 
     return (
         <Center h="100vh" bg="#013220">
             <Stack boxShadow="md" bg="whiteAlpha.900" p="20" rounded="md">
-                <Heading as="h1">Sign up for CSwap</Heading>
+            <Center><Image
+                  mt={-75}
+                  mb={-15}
+                  width='200px'
+                  src='CSwapLogo.png'
+                  alt='CSwap'
+                /></Center>
                 {error && <Alert status="error">{error}</Alert>}
 
                 <Formik
                     onSubmit={(values, { setSubmitting }) => {
+                        alert(
+                            JSON.stringify(
+                                {
+                                    captcha: values.captcha,
+                                },
+                                null,
+                                2
+                            )
+                        );
                         setTimeout(() => {
                             console.log(values);
                             setSubmitting(false);
                         }, 1000);
                     }}
-                    initialValues={{ email: "", password: "" }}
+                    initialValues={{ email: "", password: "", confirmPassword: "", captcha: "" }}
                 >
                     {({ isSubmitting }) => (
                         <Form onSubmit={handleSubmit}>
@@ -132,5 +155,3 @@ const NewSignup = () => {
         </Center>
     );
 };
-
-export default NewSignup;

@@ -30,7 +30,9 @@ function SelectProduct() {
                         <Heading as={'h1'} size={'xl'} colorScheme="green">Create Listing</Heading>
             </Center>
             <HStack>
-                <Button colorScheme={"red"}>Cancel</Button>
+                <Button colorScheme={"red"}>
+                    <Link to ="/home">Cancel</Link>
+                </Button>
                     <VStack mt="15" spacing="5" w="100%" > 
                     <Button 
                         leftIcon={<ImBooks />} 

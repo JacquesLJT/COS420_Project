@@ -1,10 +1,8 @@
 import { 
     Center,
     Stack,
-    Heading, 
     Text, 
-    Button, 
-    Checkbox, 
+    Button,
     Input, 
     InputLeftAddon, 
     InputGroup,

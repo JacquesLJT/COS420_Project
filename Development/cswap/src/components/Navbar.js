@@ -48,37 +48,37 @@ function  navbar () {
                         ml={5}
                         mr={5}
                     >
-                        <Button variant="ghost" colorScheme="green" href="./Home">Home</Button>
+                        <Button colorScheme="green"><Link to="/home">Home</Link></Button>
                     </Box>
                     <Box
                         ml={5}
                         mr={5}
                     >
-                        <Button variant="outline" colorScheme="green">Textbooks</Button>
+                        <Button colorScheme="green"><Link to="/Textbooks">Textbooks</Link></Button>
                     </Box>
                     <Box
                         ml={5}
                         mr={5}
                     >
-                        <Button>Apartment Rentals</Button>
+                        <Button colorScheme="green"><Link to="/Rentals">Apartment Rentals</Link></Button>
                     </Box>
                     <Box
                         ml={5}
                         mr={5}
                     >
-                        <Button>Electronics</Button>
+                        <Button colorScheme="green"><Link to="/Electronics">Electronics</Link></Button>
                     </Box>
                     <Box
                         ml={5}
                         mr={5}
                     >
-                        <Button>Furniture</Button>
+                        <Button colorScheme="green"><Link to="/Furniture">Furniture</Link></Button>
                     </Box>
                     <Box
                         ml={5}
                         mr={5}
                     >
-                        <Button>Appliances</Button>
+                        <Button colorScheme="green"><Link to="/Appliances">Appliances</Link></Button>
                     </Box>
                 </Flex>
                 <Box align="right">
