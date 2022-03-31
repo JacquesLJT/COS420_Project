@@ -27,7 +27,7 @@ const createTextBookListing = async () => {
     console.log("Yoyo")
     const docRef = await addDoc(collection(db, "cities"), {
       name: "Tokyo",
-      country: "Japan"
+      country: "Drift"
     });
 }
 function SelectProduct() {
