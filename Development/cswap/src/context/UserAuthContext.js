@@ -7,16 +7,10 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   FacebookAuthProvider,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth, db } from "../firebase";
-import {
-  getFirestore,
-  query,
-  getDocs,
-  collection,
-  where,
-  addDoc,
-} from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 
 const userAuthContext = createContext();
 
@@ -26,21 +20,8 @@ export function UserAuthContextProvider({ children }) {
   function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
   }
-  
-  const signUp = async (email, password) =>{
-    try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      const user = res.user;
-      await addDoc(collection(db, "users"), {
-        userid: user.uid,
-        authProvider: "local",
-        email: email,
-      });
-    } catch (err) {
-      console.error(err);
-      alert(err.message);
-    }
-    // return createUserWithEmailAndPassword(auth, email, password);
+  function signUp(email, password) {
+    return createUserWithEmailAndPassword(auth, email, password);
   }
   function logOut() {
     return signOut(auth);
@@ -53,6 +34,17 @@ export function UserAuthContextProvider({ children }) {
   function facebookSignIn() {
     const facebookAuthProvider = new FacebookAuthProvider();
     return signInWithPopup(auth, facebookAuthProvider);
+  }
+
+  function resetPassword(email) {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        //password reset email sent  
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   }
 
   useEffect(() => {
@@ -68,7 +60,7 @@ export function UserAuthContextProvider({ children }) {
 
   return (
     <userAuthContext.Provider
-      value={{ user, logIn, signUp, logOut, googleSignIn, facebookSignIn }}
+      value={{ user, logIn, signUp, logOut, googleSignIn, facebookSignIn, resetPassword }}
     >
       {children}
     </userAuthContext.Provider>

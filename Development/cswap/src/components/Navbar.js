@@ -6,8 +6,9 @@ import {
   } from '@chakra-ui/react';
 import React from 'react'
 import LogoutBtn from './LogoutBtn';
+import { Link } from 'react-router-dom';
 
-function  Header () {
+function  navbar () {
   return (
     <div> 
         <Flex
@@ -47,37 +48,37 @@ function  Header () {
                         ml={5}
                         mr={5}
                     >
-                        <Button variant="ghost" colorScheme="green">Home</Button>
+                        <Button colorScheme="green"><Link to="/home">Home</Link></Button>
                     </Box>
                     <Box
                         ml={5}
                         mr={5}
                     >
-                        <Button variant="outline" colorScheme="green">Textbooks</Button>
+                        <Button colorScheme="green"><Link to="/Textbooks">Textbooks</Link></Button>
                     </Box>
                     <Box
                         ml={5}
                         mr={5}
                     >
-                        <Button>Apartment Rentals</Button>
+                        <Button colorScheme="green"><Link to="/Rentals">Apartment Rentals</Link></Button>
                     </Box>
                     <Box
                         ml={5}
                         mr={5}
                     >
-                        <Button>Electronics</Button>
+                        <Button colorScheme="green"><Link to="/Electronics">Electronics</Link></Button>
                     </Box>
                     <Box
                         ml={5}
                         mr={5}
                     >
-                        <Button>Furniture</Button>
+                        <Button colorScheme="green"><Link to="/Furniture">Furniture</Link></Button>
                     </Box>
                     <Box
                         ml={5}
                         mr={5}
                     >
-                        <Button>Appliances</Button>
+                        <Button colorScheme="green"><Link to="/Appliances">Appliances</Link></Button>
                     </Box>
                 </Flex>
                 <Box align="right">
@@ -88,4 +89,4 @@ function  Header () {
    )
 }
  
-export default Header
+export default navbar

@@ -1,10 +1,8 @@
 import { 
     Center,
     Stack,
-    Heading, 
     Text, 
-    Button, 
-    Checkbox, 
+    Button,
     Input, 
     InputLeftAddon, 
     InputGroup,
@@ -17,6 +15,8 @@ import { Formik, Form } from 'formik';
 import {AtSignIcon, LockIcon} from "@chakra-ui/icons";
 import { useUserAuth } from '../context/UserAuthContext';
 import { FaFacebookSquare, FaGoogle } from 'react-icons/fa';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../firebase';
 // import './Login.css';
 
 export default function NewLogin() {
@@ -109,7 +109,6 @@ export default function NewLogin() {
                                         onChange={e => setPassword(e.target.value)}
                                         />
                                 </InputGroup>
-                                <Checkbox borderColor='gray.300' colorScheme="green">Keep me logged in</Checkbox>
                                 <Button
                                     isLoading={isSubmitting}
                                     loadingText="Whispering to our servers..."
@@ -150,7 +149,7 @@ export default function NewLogin() {
                         </Button>
                     </Text>
                     <Button colorScheme="green" variant="link">
-                        Forgot password?
+                        <Link to="/ForgotPassword">Forgot Password?</Link>
                     </Button>
                 </Stack>
             </Stack>

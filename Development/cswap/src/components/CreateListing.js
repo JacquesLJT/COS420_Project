@@ -20,26 +20,16 @@ import { GiCoffeeMug } from 'react-icons/gi';
 import {BiChair} from 'react-icons/bi';
 import { Switch, Routes, Route, Navigate, Link,} from 'react-router-dom';
 import { useNavigate } from 'react-router';
-import { getFirestore, doc, setDoc, addDoc, collection } from 'firebase/firestore';
-import { ref, set } from 'firebase/database';
 import { db } from '../firebase';
+import { addDoc, collection } from 'firebase/firestore';
 
-const createTextBookListing = async () =>{
-    // set(ref(db, 'users/'+"4943"), {
-    //     username: "hello"
-    // });
-    // const db = getFirestore();
-    const message = doc(db, 'Textbooks/anthony');
-    const docData = {
-        answer: 'Anthony',
-        price: 3.99,
-    };
-    console.log("hello");
-    addDoc(collection(db, "Textbooks"), {
-        answer: "hello"
+const createTextBookListing = async () => {
+    console.log("Yoyo")
+    const docRef = await addDoc(collection(db, "cities"), {
+      name: "Tokyo",
+      country: "Japan"
     });
 }
-
 function SelectProduct() {
     return (
         <Stack boxShadow="md" bg="whiteAlpha.900" p='10' rounded="md" w="50%" >  
@@ -47,14 +37,16 @@ function SelectProduct() {
                         <Heading as={'h1'} size={'xl'} colorScheme="green">Create Listing</Heading>
             </Center>
             <HStack>
-                <Button colorScheme={"red"}><Link to="/home">Cancel</Link></Button>
+                <Button colorScheme={"red"}>
+                    <Link to ="/home">Cancel</Link>
+                </Button>
                     <VStack mt="15" spacing="5" w="100%" > 
                     <Button 
                         leftIcon={<ImBooks />} 
                         boxShadow="lg" 
                         colorScheme="green" 
-                        variant="outline" 
-                        onClick={createTextBookListing}> 
+                        variant="outline"
+                        onClick={createTextBookListing}>
                         <Link to="textbook/">Texbooks</Link>
                     </Button> 
                     <Button 
@@ -86,7 +78,7 @@ function SelectProduct() {
                         <Link to="appliances/">Appliances</Link>
                     </Button>   
                 </VStack>
-                {/* <Button colorScheme={"green"}>Next</Button> */}
+                <Button colorScheme={"green"}>Next</Button>
             </HStack>
         </Stack>
     )
@@ -98,7 +90,7 @@ const LoadTextBookForm = async () => {
 
 function TextBookForm() {
     return (
-        <Stack boxShadow="md" bg="whiteAlpha.900" p='10' rounded="md" w="50%" >
+        <Stack boxShadow="md" bg="whiteAlpha.900" p='10' rounded="md" w="50%" >  
              <Center mb='10'>
                     <Heading as={'h1'} size={'xl'} colorScheme="green">Add Textbook</Heading>
             </Center>

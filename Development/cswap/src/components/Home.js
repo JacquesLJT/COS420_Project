@@ -11,8 +11,7 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import { useUserAuth } from '../context/UserAuthContext';
 // import Sidebar from './Sidebar';
-import Header from './Header';
-import './Home.css';
+import Navbar from './Navbar';
 import ProductCard from './ProductCard';
 
 //import Sidebar from './Sidebar';
@@ -25,7 +24,7 @@ const Home = () => {
   };
   return (
     <div>
-      <Header/>
+      <Navbar/>
       <Center mb='10'>
         <Heading as={'h1'} size={'xl'} colorScheme="green" mt={110}>Home</Heading>
       </Center>
