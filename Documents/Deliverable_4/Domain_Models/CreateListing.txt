@@ -1,0 +1,68 @@
+class CreateListing
+{
+  
+  Title;
+Description;
+Price;
+Image;
+  }
+
+class TextbookFrom
+{
+  
+ISBN;
+UsedOrNew;
+isA CreateListing;
+}
+
+class AppliancesFrom
+{
+  
+  Title;
+Description;
+UsedOrNew;
+Price;
+Image;
+isA CreateListing;
+}
+
+class ApartmentForm
+{
+  
+  Title;
+Description;
+Beds;
+Bath;
+Amenities;
+Address;
+Price;
+isA CreateListing;
+}
+
+class ElectronicsForm
+{
+  Title;
+Description;
+UsedOrNew;
+Price;
+Image;
+  isA CreateListing;
+}
+
+class FurnitureForm
+{
+  
+  Title;
+Description;
+UsedOrNew;
+Price;
+Image;
+isA CreateListing;
+}
+
+class AuthorizedUser
+{
+  
+  1 -- * CreateListing;
+}
+
