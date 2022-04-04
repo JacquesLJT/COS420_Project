@@ -45,8 +45,7 @@ function SelectProduct() {
                         leftIcon={<ImBooks />} 
                         boxShadow="lg" 
                         colorScheme="green" 
-                        variant="outline"
-                        onClick={createTextBookListing}>
+                        variant="outline">
                         <Link to="textbook/">Texbooks</Link>
                     </Button> 
                     <Button 
@@ -78,7 +77,7 @@ function SelectProduct() {
                         <Link to="appliances/">Appliances</Link>
                     </Button>   
                 </VStack>
-                <Button colorScheme={"green"}>Next</Button>
+                <Button colorScheme={"green"} visibility={'hidden'}>Next</Button>
             </HStack>
         </Stack>
     )
@@ -99,13 +98,27 @@ function TextBookForm() {
                     <Link to="/createListing">Back</Link> 
                 </Button>
                 <VStack spacing={5} p={10}>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
+                    <Center>
+                        <Text p={5}>Title</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                        
+                        <Text p={5}>Price</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                    </Center>
+                    
+                    <Center>
+                        <Text p={5}>ISBN</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                        <Text p={5}>ZIP</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                    </Center>
+
+                    <Center>
+                        <Text p={5}>Description</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                    </Center>
                 </VStack>
-                <Button colorScheme={"green"}>Next</Button>
+                <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
             </HStack>
         </Stack>
     )
@@ -121,13 +134,27 @@ function ApartmentRentalsForm() {
                     <Link to="/createListing">Back</Link> 
                 </Button>
                 <VStack spacing={5} p={10}>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
+                    <Center>
+                        <Text p={5}>Title</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                        
+                        <Text p={5}>Price</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                    </Center>
+                    
+                    <Center>
+                        <Text p={5}>ISBN</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                        <Text p={5}>ZIP</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                    </Center>
+
+                    <Center>
+                        <Text p={5}>Description</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                    </Center>
                 </VStack>
-                <Button colorScheme={"green"}>Next</Button>
+                <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
             </HStack>
         </Stack>
     )
@@ -143,13 +170,27 @@ function ElectronicsForm() {
                     <Link to="/createListing">Back</Link> 
                 </Button>
                 <VStack spacing={5} p={10}>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
+                <Center>
+                        <Text p={5}>Title</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                        
+                        <Text p={5}>Price</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                    </Center>
+                    
+                    <Center>
+                        <Text p={5}>ISBN</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                        <Text p={5}>ZIP</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                    </Center>
+
+                    <Center>
+                        <Text p={5}>Description</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                    </Center>
                 </VStack>
-                <Button colorScheme={"green"}>Next</Button>
+                <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
             </HStack>
         </Stack>
     )
@@ -165,13 +206,27 @@ function FurnitureForm() {
                     <Link to="/createListing">Back</Link> 
                 </Button>
                 <VStack spacing={5} p={10}>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
+                <Center>
+                        <Text p={5}>Title</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                        
+                        <Text p={5}>Price</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                    </Center>
+                    
+                    <Center>
+                        <Text p={5}>ISBN</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                        <Text p={5}>ZIP</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                    </Center>
+
+                    <Center>
+                        <Text p={5}>Description</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                    </Center>
                 </VStack>
-                <Button colorScheme={"green"}>Next</Button>
+                <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
             </HStack>
         </Stack>
     )
@@ -187,13 +242,27 @@ function AppliancesForm() {
                     <Link to="/createListing">Back</Link> 
                 </Button>
                 <VStack spacing={5} p={10}>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
-                    <Input borderColor="green" border ="2px"></Input>
+                <Center>
+                        <Text p={5}>Title</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                        
+                        <Text p={5}>Price</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                    </Center>
+                    
+                    <Center>
+                        <Text p={5}>ISBN</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                        <Text p={5}>ZIP</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                    </Center>
+
+                    <Center>
+                        <Text p={5}>Description</Text>
+                        <Input borderColor="green" border ="2px"></Input>
+                    </Center>
                 </VStack>
-                <Button colorScheme={"green"}>Next</Button>
+                <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
             </HStack>
         </Stack>
     )
