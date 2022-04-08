@@ -21,18 +21,11 @@ import { GiCoffeeMug } from 'react-icons/gi';
 import {BiChair} from 'react-icons/bi';
 import { Switch, Routes, Route, Navigate, Link,} from 'react-router-dom';
 import { useNavigate } from 'react-router';
-import { db, storage } from '../firebase';
+import { db, storage, auth } from '../firebase';
 import { addDoc, collection } from 'firebase/firestore';
-import ReactImageUploading from 'react-images-uploading';
 import { ref, uploadBytes } from 'firebase/storage';
 
-const createTextBookListing = async () => {
-    console.log("Yoyo")
-    const docRef = await addDoc(collection(db, "cities"), {
-      name: "Tokyo",
-      country: "Drift"
-    });
-}
+
 function SelectProduct() {
     return (
         <Stack boxShadow="md" bg="whiteAlpha.900" p='10' rounded="md" w="50%" >  
@@ -40,289 +33,536 @@ function SelectProduct() {
                         <Heading as={'h1'} size={'xl'} colorScheme="green">Create Listing</Heading>
             </Center>
             <HStack>
-                <Button colorScheme={"red"}>
-                    <Link to ="/home">Cancel</Link>
-                </Button>
+                <Link to ="/home"><Button colorScheme={"red"}>Cancel</Button></Link>
                     <VStack mt="15" spacing="5" w="100%" > 
-                    <Button 
+                    <Link to="textbook/"><Button 
                         leftIcon={<ImBooks />} 
                         boxShadow="lg" 
                         colorScheme="green" 
                         variant="outline">
-                        <Link to="textbook/">Texbooks</Link>
-                    </Button> 
-                    <Button 
-                        leftIcon={<ImHome3 />} 
-                        boxShadow="lg" 
-                        colorScheme="green" 
-                        variant="outline">
-                        <Link to="apartmentRentals/">Apartment Rentals</Link>
-                    </Button>   
-                    <Button 
+                        Textbooks
+                    </Button></Link>
+                    <Link to="apartmentRentals/">
+                        <Button 
+                            leftIcon={<ImHome3 />} 
+                            boxShadow="lg" 
+                            colorScheme="green" 
+                            variant="outline">
+                            Apartment Rentals
+                        </Button>
+                    </Link>
+                    <Link to="electronics/"><Button 
                         leftIcon={<ImMobile />}
                         boxShadow="lg" 
                         colorScheme="green" 
                         variant="outline">
-                    <Link to="electronics/">Electronics</Link>   
-                    </Button>
-                    <Button 
+                    Electronics  
+                    </Button></Link> 
+                    <Link to="furniture/"><Button 
                         leftIcon={<BiChair />} 
                         boxShadow="lg" 
                         colorScheme="green" 
                         variant="outline">
-                        <Link to="electronics/">Furniture</Link>
-                    </Button>
-                    <Button 
+                        Furniture
+                    </Button></Link>
+                    <Link to="appliances/"><Button 
                         leftIcon={<GiCoffeeMug />} 
                         boxShadow="lg" 
                         colorScheme="green" 
                         variant="outline">
-                        <Link to="appliances/">Appliances</Link>
-                    </Button>   
+                        appliances
+                    </Button></Link>   
                 </VStack>
                 <Button colorScheme={"green"} visibility={'hidden'}>Next</Button>
             </HStack>
         </Stack>
     )
 }
-const LoadTextBookForm = async () => {
-    const navigate = useNavigate();
-    navigate("/textbook");
-};
-
-function ImageUploader(){
-    const [image , setImage] = useState('');
-    const upload = ()=>{
-    if(image == null)
-        return;
-    const imageRef = ref(storage, `/images/${image.name}`);
-
-    uploadBytes(imageRef, image).then((snapshot) => {
-        console.log('Uploaded a blob or file!');
-      });
-    }
-
-    return (
-        <Center>
-        <input type="file" onChange={(e)=>{setImage(e.target.files[0])}}/>
-        <Button colorScheme={"green"} onClick={upload}>Upload</Button>
-        </Center>
-    );
-}
-
 
 function TextBookForm() {
+    const [formData, setFormData] = useState({});
+    const [image, setImage] = useState("");
+    const updateInput = async (e) => {
+        // console.log("Updated "+e.target.name+" with "+e.target.value+" Files "+e.target.files)
+        if (e.target.files != null){
+            await setImage(e.target.files[0]);
+            // console.log("Files: "+image.name);
+        } else {
+            setFormData({
+              ...formData,
+              [e.target.name]: e.target.value,
+            })
+        }
+    }
+
+    const handleSubmit = event => {
+        event.preventDefault()
+        createAListing(formData)
+        console.log("Title: "+formData.title)
+        setImage();
+        setFormData({
+            title: '',
+            ISBN: '',
+            description: '',
+            zip: '',
+            price: '',
+            imageName: '',
+            tag: ''
+        })
+    }
+    const uploadImage = ()=>{
+        if(image == null)
+            return;
+        const imageRef = ref(storage, `/images/${auth.currentUser.uid+"_"+image.name}`);
+        uploadBytes(imageRef, image).then((snapshot) => {
+            console.log('Uploaded a blob or file!');
+        });
+    }
+    const createAListing = async (formData) => {
+        // console.log(formData);
+        uploadImage()
+        const docRef = await addDoc(collection(db, "textbooks"), {
+            UID: auth.currentUser.uid,
+            title: formData.title,
+            ISBN: formData.ISBN || '',
+            description: formData.description || '',
+            zip: formData.zip,
+            price: formData.price,
+            imageName: auth.currentUser.uid+"_"+image.name,
+            tags: "",
+        });
+    }
+    
     return (
         <Stack boxShadow="md" bg="whiteAlpha.900" p='10' rounded="md" w="50%" >  
              <Center mb='10'>
                     <Heading as={'h1'} size={'xl'} colorScheme="green">Add Textbook</Heading>
             </Center>
-            <HStack>
-                <Button colorScheme={"green"}>
-                    <Link to="/createListing">Back</Link> 
-                </Button>
-                <VStack spacing={5} p={10}>
-                    <Center>
-                        <Text p={5}>Title</Text>
-                        <Input borderColor="green" border ="2px"></Input>
+                <form onSubmit={handleSubmit}>
+                <HStack>
+                    <Link to="/createListing"><Button colorScheme={"green"}>Back</Button></Link> 
+                    <VStack spacing={5} p={10}>
+                        <Center>
+                            <Text p={5}>Title</Text>
+                            <Input borderColor="green" border ="2px" name='title' onChange={updateInput} value={formData.title || ''}></Input>
+                            
+                            <Text p={5}>Price</Text>
+                            <Input borderColor="green" border ="2px" name='price' onChange={updateInput} value={formData.price || ''}></Input>
+                        </Center>
                         
-                        <Text p={5}>Price</Text>
-                        <Input borderColor="green" border ="2px"></Input>
-                    </Center>
-                    
-                    <Center>
-                        <Text p={5}>ISBN</Text>
-                        <Input borderColor="green" border ="2px"></Input>
-                        <Text p={5}>ZIP</Text>
-                        <Input borderColor="green" border ="2px"></Input>
-                    </Center>
-                    
-                    <Text>Description</Text>
-                    <Center>
-                        <Textarea
-                            borderColor="green" 
-                            border ="2px"
-                            rows={10}
-                            cols={40}
-                            >
-                        </Textarea>
-                    </Center>
-                    <ImageUploader></ImageUploader>
-                </VStack>
-                <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
-            </HStack>
+                        <Center>
+                            <Text p={5}>ISBN</Text>
+                            <Input borderColor="green" border ="2px" name='ISBN' onChange={updateInput} value={formData.ISBN || ''}></Input>
+                            <Text p={5}>ZIP</Text>
+                            <Input borderColor="green" border ="2px" name='zip' onChange={updateInput} value={formData.zip || ''}></Input>
+                        </Center>
+                        
+                        <Text>Description</Text>
+                        <Center>
+                            <Textarea
+                                name='description'
+                                borderColor="green" 
+                                border ="2px"
+                                rows={10}
+                                cols={40}        
+                                onChange={updateInput}
+                                value={formData.description || ''}
+                                >
+                            </Textarea>
+                        </Center>
+                        <input type="file" onChange={updateInput}/>
+                    </VStack>
+                    <Link to="/home"><Button colorScheme={"green"} onClick="createAListing(formData)" type="submit">Create</Button></Link>  
+                </HStack>
+            </form>
         </Stack>
     )
 }
+
+
 function ApartmentRentalsForm() {
+    const [formData, setFormData] = useState({});
+    const [image, setImage] = useState("");
+    const updateInput = async (e) => {
+        // console.log("Updated "+e.target.name+" with "+e.target.value+" Files "+e.target.files)
+        if (e.target.files != null){
+            await setImage(e.target.files[0]);
+            // console.log("Files: "+image.name);
+        } else {
+            setFormData({
+              ...formData,
+              [e.target.name]: e.target.value,
+            })
+        }
+    }
+
+    const handleSubmit = event => {
+        event.preventDefault()
+        createAListing(formData)
+        console.log("Title: "+formData.title)
+        setImage();
+        setFormData({
+            title: '',
+            beds: '',
+            description: '',
+            zip: '',
+            price: '',
+            imageName: '',
+            tag: ''
+        })
+    }
+    const uploadImage = ()=>{
+        if(image == null)
+            return;
+        const imageRef = ref(storage, `/images/${auth.currentUser.uid+"_"+image.name}`);
+        uploadBytes(imageRef, image).then((snapshot) => {
+            console.log('Uploaded a blob or file!');
+        });
+    }
+    const createAListing = async (formData) => {
+        // console.log(formData);
+        uploadImage()
+        const docRef = await addDoc(collection(db, "apartmentrentals"), {
+            UID: auth.currentUser.uid,
+            title: formData.title,
+            beds: formData.beds,
+            description: formData.description || '',
+            zip: formData.zip,
+            price: formData.price,
+            imageName: auth.currentUser.uid+"_"+image.name,
+            tags: "",
+        });
+    }
+    
     return (
         <Stack boxShadow="md" bg="whiteAlpha.900" p='10' rounded="md" w="50%" >  
              <Center mb='10'>
                     <Heading as={'h1'} size={'xl'} colorScheme="green">Add Apartment</Heading>
             </Center>
-            <HStack>
-                <Button colorScheme={"green"}>
-                    <Link to="/createListing">Back</Link> 
-                </Button>
-                <VStack spacing={5} p={10}>
-                    <Center>
-                        <Text p={5}>Title</Text>
-                        <Input borderColor="green" border ="2px"></Input>
+                <form onSubmit={handleSubmit}>
+                <HStack>
+                    <Link to="/createListing"><Button colorScheme={"green"}>Back</Button></Link> 
+                    <VStack spacing={5} p={10}>
+                        <Center>
+                            <Text p={5}>Title</Text>
+                            <Input borderColor="green" border ="2px" name='title' onChange={updateInput} value={formData.title || ''}></Input>
+                            
+                            <Text p={5}>Price</Text>
+                            <Input borderColor="green" border ="2px" name='price' onChange={updateInput} value={formData.price || ''}></Input>
+                        </Center>
                         
-                        <Text p={5}>Price</Text>
-                        <Input borderColor="green" border ="2px"></Input>
-                    </Center>
-                    
-                    <Center>
-                        <Text p={5}>ISBN</Text>
-                        <Input borderColor="green" border ="2px"></Input>
-                        <Text p={5}>ZIP</Text>
-                        <Input borderColor="green" border ="2px"></Input>
-                    </Center>
-
-                    <Center>
-                        <Text p={5}>Description</Text>
-                        <Textarea
-                            borderColor="green" 
-                            border ="2px"
-                            rows={10}
-                            cols={40}
-                            >
-                        </Textarea>
-                    </Center>
-                    <ImageUploader></ImageUploader>
-                </VStack>
-                <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
-            </HStack>
+                        <Center>
+                            <Text p={5}>Beds</Text>
+                            <Input borderColor="green" border ="2px" name='beds' onChange={updateInput} value={formData.beds || ''}></Input>
+                            <Text p={5}>ZIP</Text>
+                            <Input borderColor="green" border ="2px" name='zip' onChange={updateInput} value={formData.zip || ''}></Input>
+                        </Center>
+                        
+                        <Text>Description</Text>
+                        <Center>
+                            <Textarea
+                                name='description'
+                                borderColor="green" 
+                                border ="2px"
+                                rows={10}
+                                cols={40}        
+                                onChange={updateInput}
+                                value={formData.description || ''}
+                                >
+                            </Textarea>
+                        </Center>
+                        <input type="file" onChange={updateInput}/>
+                    </VStack>
+                    <Link to="/home"><Button colorScheme={"green"} onClick="createAListing(formData)" type="submit">Create</Button></Link>
+                </HStack>
+            </form>
         </Stack>
     )
 }
+
+
 function ElectronicsForm() {
+    const [formData, setFormData] = useState({});
+    const [image, setImage] = useState("");
+    const updateInput = async (e) => {
+        // console.log("Updated "+e.target.name+" with "+e.target.value+" Files "+e.target.files)
+        if (e.target.files != null){
+            await setImage(e.target.files[0]);
+            // console.log("Files: "+image.name);
+        } else {
+            setFormData({
+              ...formData,
+              [e.target.name]: e.target.value,
+            })
+        }
+    }
+
+    const handleSubmit = event => {
+        event.preventDefault()
+        createAListing(formData)
+        console.log("Title: "+formData.title)
+        setImage();
+        setFormData({
+            title: '',
+            description: '',
+            zip: '',
+            price: '',
+            imageName: '',
+            tag: ''
+        })
+    }
+    const uploadImage = ()=>{
+        if(image == null)
+            return;
+        const imageRef = ref(storage, `/images/${auth.currentUser.uid+"_"+image.name}`);
+        uploadBytes(imageRef, image).then((snapshot) => {
+            console.log('Uploaded a blob or file!');
+        });
+    }
+    const createAListing = async (formData) => {
+        // console.log(formData);
+        uploadImage()
+        const docRef = await addDoc(collection(db, "electronics"), {
+            UID: auth.currentUser.uid,
+            title: formData.title,
+            description: formData.description || '',
+            zip: formData.zip,
+            price: formData.price,
+            imageName: auth.currentUser.uid+"_"+image.name,
+            tags: "",
+        });
+    }
+    
     return (
         <Stack boxShadow="md" bg="whiteAlpha.900" p='10' rounded="md" w="50%" >  
              <Center mb='10'>
-                    <Heading as={'h1'} size={'xl'} colorScheme="green">Add Electronic</Heading>
+                    <Heading as={'h1'} size={'xl'} colorScheme="green">Add Electronics</Heading>
             </Center>
-            <HStack>
-                <Button colorScheme={"green"}>
-                    <Link to="/createListing">Back</Link> 
-                </Button>
-                <VStack spacing={5} p={10}>
-                <Center>
-                        <Text p={5}>Title</Text>
-                        <Input borderColor="green" border ="2px"></Input>
+            <form onSubmit={handleSubmit}>
+                <HStack>
+                <Link to="/createListing"><Button colorScheme={"green"}>Back</Button></Link> 
+                    <VStack spacing={5} p={10}>
+                        <Center>
+                            <Text p={5}>Title</Text>
+                            <Input borderColor="green" border ="2px" name='title' onChange={updateInput} value={formData.title || ''}></Input>
+                            
+                            <Text p={5}>Price</Text>
+                            <Input borderColor="green" border ="2px" name='price' onChange={updateInput} value={formData.price || ''}></Input>
+                        </Center>
                         
-                        <Text p={5}>Price</Text>
-                        <Input borderColor="green" border ="2px"></Input>
-                    </Center>
-                    
-                    <Center>
-                        <Text p={5}>ISBN</Text>
-                        <Input borderColor="green" border ="2px"></Input>
-                        <Text p={5}>ZIP</Text>
-                        <Input borderColor="green" border ="2px"></Input>
-                    </Center>
-
-                    <Center>
-                        <Text p={5}>Description</Text>
-                        <Textarea
-                            borderColor="green" 
-                            border ="2px"
-                            rows={10}
-                            cols={40}
-                            >
-                        </Textarea>
-                    </Center>
-                    <ImageUploader></ImageUploader>
-                </VStack>
-                <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
-            </HStack>
+                        <Center>
+                            <Text p={5}>ZIP</Text>
+                            <Input borderColor="green" border ="2px" name='zip' onChange={updateInput} value={formData.zip || ''}></Input>
+                        </Center>
+                        
+                        <Text>Description</Text>
+                        <Center>
+                            <Textarea
+                                name='description'
+                                borderColor="green" 
+                                border ="2px"
+                                rows={10}
+                                cols={40}        
+                                onChange={updateInput}
+                                value={formData.description || ''}
+                                >
+                            </Textarea>
+                        </Center>
+                        <input type="file" onChange={updateInput}/>
+                    </VStack>
+                    <Link to="/home"><Button colorScheme={"green"} onClick="createAListing(formData)" type="submit">Create</Button></Link>
+                </HStack>
+            </form>
         </Stack>
     )
 }
 function FurnitureForm() {
+    const [formData, setFormData] = useState({});
+    const [image, setImage] = useState("");
+    const updateInput = async (e) => {
+        // console.log("Updated "+e.target.name+" with "+e.target.value+" Files "+e.target.files)
+        if (e.target.files != null){
+            await setImage(e.target.files[0]);
+            // console.log("Files: "+image.name);
+        } else {
+            setFormData({
+              ...formData,
+              [e.target.name]: e.target.value,
+            })
+        }
+    }
+
+    const handleSubmit = event => {
+        event.preventDefault()
+        createAListing(formData)
+        console.log("Title: "+formData.title)
+        setImage();
+        setFormData({
+            title: '',
+            description: '',
+            zip: '',
+            price: '',
+            imageName: '',
+            tag: ''
+        })
+    }
+    const uploadImage = ()=>{
+        if(image == null)
+            return;
+        const imageRef = ref(storage, `/images/${auth.currentUser.uid+"_"+image.name}`);
+        uploadBytes(imageRef, image).then((snapshot) => {
+            console.log('Uploaded a blob or file!');
+        });
+    }
+    const createAListing = async (formData) => {
+        // console.log(formData);
+        uploadImage()
+        const docRef = await addDoc(collection(db, "furniture"), {
+            UID: auth.currentUser.uid,
+            title: formData.title,
+            description: formData.description || '',
+            zip: formData.zip,
+            price: formData.price,
+            imageName: auth.currentUser.uid+"_"+image.name,
+            tags: "",
+        });
+    }
+    
     return (
         <Stack boxShadow="md" bg="whiteAlpha.900" p='10' rounded="md" w="50%" >  
              <Center mb='10'>
                     <Heading as={'h1'} size={'xl'} colorScheme="green">Add Furniture</Heading>
             </Center>
-            <HStack>
-                <Button colorScheme={"green"}>
-                    <Link to="/createListing">Back</Link> 
-                </Button>
-                <VStack spacing={5} p={10}>
-                <Center>
-                        <Text p={5}>Title</Text>
-                        <Input borderColor="green" border ="2px"></Input>
+            <form onSubmit={handleSubmit}>
+                <HStack>
+                    <Link to="/createListing"><Button colorScheme={"green"}>Back</Button></Link> 
+                    <VStack spacing={5} p={10}>
+                        <Center>
+                            <Text p={5}>Title</Text>
+                            <Input borderColor="green" border ="2px" name='title' onChange={updateInput} value={formData.title || ''}></Input>
+                            
+                            <Text p={5}>Price</Text>
+                            <Input borderColor="green" border ="2px" name='price' onChange={updateInput} value={formData.price || ''}></Input>
+                        </Center>
                         
-                        <Text p={5}>Price</Text>
-                        <Input borderColor="green" border ="2px"></Input>
-                    </Center>
-                    
-                    <Center>
-                        <Text p={5}>ISBN</Text>
-                        <Input borderColor="green" border ="2px"></Input>
-                        <Text p={5}>ZIP</Text>
-                        <Input borderColor="green" border ="2px"></Input>
-                    </Center>
-
-                    <Center>
-                        <Text p={5}>Description</Text>
-                        <Textarea
-                            borderColor="green" 
-                            border ="2px"
-                            rows={10}
-                            cols={40}
-                            >
-                        </Textarea>
-                    </Center>
-                    <ImageUploader></ImageUploader>
-                </VStack>
-                <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
-            </HStack>
+                        <Center>
+                            <Text p={5}>ZIP</Text>
+                            <Input borderColor="green" border ="2px" name='zip' onChange={updateInput} value={formData.zip || ''}></Input>
+                        </Center>
+                        
+                        <Text>Description</Text>
+                        <Center>
+                            <Textarea
+                                name='description'
+                                borderColor="green" 
+                                border ="2px"
+                                rows={10}
+                                cols={40}        
+                                onChange={updateInput}
+                                value={formData.description || ''}
+                                >
+                            </Textarea>
+                        </Center>
+                        <input type="file" onChange={updateInput}/>
+                    </VStack>
+                    <Link to="/home"><Button colorScheme={"green"} onClick="createAListing(formData)" type="submit">Create</Button></Link>
+                </HStack>
+            </form>
         </Stack>
     )
 }
 function AppliancesForm() {
+    const [formData, setFormData] = useState({});
+    const [image, setImage] = useState("");
+    const updateInput = async (e) => {
+        // console.log("Updated "+e.target.name+" with "+e.target.value+" Files "+e.target.files)
+        if (e.target.files != null){
+            await setImage(e.target.files[0]);
+            // console.log("Files: "+image.name);
+        } else {
+            setFormData({
+              ...formData,
+              [e.target.name]: e.target.value,
+            })
+        }
+    }
+
+    const handleSubmit = event => {
+        event.preventDefault()
+        createAListing(formData)
+        console.log("Title: "+formData.title)
+        setImage();
+        setFormData({
+            title: '',
+            description: '',
+            zip: '',
+            price: '',
+            imageName: '',
+            tag: ''
+        })
+    }
+    const uploadImage = ()=>{
+        if(image == null)
+            return;
+        const imageRef = ref(storage, `/images/${auth.currentUser.uid+"_"+image.name}`);
+        uploadBytes(imageRef, image).then((snapshot) => {
+            console.log('Uploaded a blob or file!');
+        });
+    }
+    const createAListing = async (formData) => {
+        // console.log(formData);
+        uploadImage()
+        const docRef = await addDoc(collection(db, "appliances"), {
+            UID: auth.currentUser.uid,
+            title: formData.title,
+            description: formData.description || '',
+            zip: formData.zip,
+            price: formData.price,
+            imageName: auth.currentUser.uid+"_"+image.name,
+            tags: "",
+        });
+    }
+    
     return (
         <Stack boxShadow="md" bg="whiteAlpha.900" p='10' rounded="md" w="50%" >  
              <Center mb='10'>
-                    <Heading as={'h1'} size={'xl'} colorScheme="green">Add Appliance</Heading>
+                    <Heading as={'h1'} size={'xl'} colorScheme="green">Add Appliances</Heading>
             </Center>
-            <HStack>
-                <Button colorScheme={"green"}>
-                    <Link to="/createListing">Back</Link> 
-                </Button>
-                <VStack spacing={5} p={10}>
-                <Center>
-                        <Text p={5}>Title</Text>
-                        <Input borderColor="green" border ="2px"></Input>
+            <form onSubmit={handleSubmit}>
+                <HStack>
+                    <Link to="/createListing"><Button colorScheme={"green"}>Back</Button></Link> 
+                    <VStack spacing={5} p={10}>
+                        <Center>
+                            <Text p={5}>Title</Text>
+                            <Input borderColor="green" border ="2px" name='title' onChange={updateInput} value={formData.title || ''}></Input>
+                            
+                            <Text p={5}>Price</Text>
+                            <Input borderColor="green" border ="2px" name='price' onChange={updateInput} value={formData.price || ''}></Input>
+                        </Center>
                         
-                        <Text p={5}>Price</Text>
-                        <Input borderColor="green" border ="2px"></Input>
-                    </Center>
-                    
-                    <Center>
-                        <Text p={5}>ISBN</Text>
-                        <Input borderColor="green" border ="2px"></Input>
-                        <Text p={5}>ZIP</Text>
-                        <Input borderColor="green" border ="2px"></Input>
-                    </Center>
-
-                    <Center>
-                        <Text p={5}>Description</Text>
-                        <Textarea
-                            borderColor="green" 
-                            border ="2px"
-                            rows={10}
-                            cols={40}
-                            >
-                        </Textarea>
-                    </Center>
-                    <ImageUploader></ImageUploader>
-                </VStack>
-                <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
-            </HStack>
+                        <Center>
+                            <Text p={5}>ZIP</Text>
+                            <Input borderColor="green" border ="2px" name='zip' onChange={updateInput} value={formData.zip || ''}></Input>
+                        </Center>
+                        
+                        <Text>Description</Text>
+                        <Center>
+                            <Textarea
+                                name='description'
+                                borderColor="green" 
+                                border ="2px"
+                                rows={10}
+                                cols={40}        
+                                onChange={updateInput}
+                                value={formData.description || ''}
+                                >
+                            </Textarea>
+                        </Center>
+                        <input type="file" onChange={updateInput}/>
+                    </VStack>
+                    <Link to="/home"><Button colorScheme={"green"} onClick="createAListing(formData)" type="submit">Create</Button></Link>
+                </HStack>
+            </form>
         </Stack>
     )
 }
