@@ -12,6 +12,7 @@ import Electronics from "./pages/Electronics";
 import Furniture from "./pages/Furniture";
 import Rentals from "./pages/Rentals";
 import Textbooks from "./pages/Textbooks";
+import Chat from "./pages/Chat";
 
 import './App.css';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -41,6 +42,7 @@ function App() {
           <Route path="/Furniture" element={<Furniture/>} />
           <Route path="/Rentals" element={<Rentals/>} />
           <Route path="/Textbooks" element={<Textbooks/>} />
+          <Route path="/Chat" element={<Chat/>} />
         </Routes>
       </UserAuthContextProvider>
     </ChakraProvider>

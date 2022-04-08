@@ -190,6 +190,7 @@ function ApartmentRentalsForm() {
                             >
                         </Textarea>
                     </Center>
+                    <ImageUploader></ImageUploader>
                 </VStack>
                 <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
             </HStack>
@@ -232,6 +233,7 @@ function ElectronicsForm() {
                             >
                         </Textarea>
                     </Center>
+                    <ImageUploader></ImageUploader>
                 </VStack>
                 <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
             </HStack>
@@ -274,6 +276,7 @@ function FurnitureForm() {
                             >
                         </Textarea>
                     </Center>
+                    <ImageUploader></ImageUploader>
                 </VStack>
                 <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
             </HStack>
@@ -316,6 +319,7 @@ function AppliancesForm() {
                             >
                         </Textarea>
                     </Center>
+                    <ImageUploader></ImageUploader>
                 </VStack>
                 <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
             </HStack>

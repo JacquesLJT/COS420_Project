@@ -81,7 +81,10 @@ function  navbar () {
                         <Button colorScheme="green"><Link to="/Appliances">Appliances</Link></Button>
                     </Box>
                 </Flex>
-                <Box align="right">
+                <Box align="right" p={5}>
+                    <Button colorScheme="green"><Link to="/Chat">Chat</Link></Button>
+                </Box>
+                <Box align="right">                    
                     <LogoutBtn/>
                 </Box> 
         </Flex>
