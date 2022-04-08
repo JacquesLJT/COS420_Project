@@ -13,6 +13,7 @@ import Furniture from "./pages/Furniture";
 import Rentals from "./pages/Rentals";
 import Textbooks from "./pages/Textbooks";
 import Chat from "./pages/Chat";
+import AcctView from "./pages/AcctView";
 
 import './App.css';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -43,6 +44,7 @@ function App() {
           <Route path="/Rentals" element={<Rentals/>} />
           <Route path="/Textbooks" element={<Textbooks/>} />
           <Route path="/Chat" element={<Chat/>} />
+          <Route path="/AcctView" element={<AcctView/>} />
         </Routes>
       </UserAuthContextProvider>
     </ChakraProvider>

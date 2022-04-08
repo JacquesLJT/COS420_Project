@@ -83,8 +83,14 @@ function  navbar () {
                 </Flex>
                 <Box align="right" p={5}>
                     <Button colorScheme="green"><Link to="/Chat">Chat</Link></Button>
-                </Box>
-                <Box align="right">                    
+                </Box>         
+                <Box
+                        ml={5}
+                        mr={5}
+                    >
+                        <Button colorScheme="green"><Link to="/AcctView">Your Account</Link></Button>
+                    </Box>
+                <Box align="right">
                     <LogoutBtn/>
                 </Box> 
         </Flex>
