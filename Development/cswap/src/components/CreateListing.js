@@ -13,7 +13,8 @@ import {
     Image,
     Flex,
     VStack,
-    HStack
+    HStack,
+    Textarea
 } from '@chakra-ui/react';
 import { ImBooks, ImHome3, ImMobile} from 'react-icons/im';
 import { GiCoffeeMug } from 'react-icons/gi';
@@ -112,10 +113,16 @@ function TextBookForm() {
                         <Text p={5}>ZIP</Text>
                         <Input borderColor="green" border ="2px"></Input>
                     </Center>
-
+                    
+                    <Text>Description</Text>
                     <Center>
-                        <Text p={5}>Description</Text>
-                        <Input borderColor="green" border ="2px"></Input>
+                        <Textarea
+                            borderColor="green" 
+                            border ="2px"
+                            rows={10}
+                            cols={40}
+                            >
+                        </Textarea>
                     </Center>
                 </VStack>
                 <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
@@ -151,7 +158,13 @@ function ApartmentRentalsForm() {
 
                     <Center>
                         <Text p={5}>Description</Text>
-                        <Input borderColor="green" border ="2px"></Input>
+                        <Textarea
+                            borderColor="green" 
+                            border ="2px"
+                            rows={10}
+                            cols={40}
+                            >
+                        </Textarea>
                     </Center>
                 </VStack>
                 <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
@@ -187,7 +200,13 @@ function ElectronicsForm() {
 
                     <Center>
                         <Text p={5}>Description</Text>
-                        <Input borderColor="green" border ="2px"></Input>
+                        <Textarea
+                            borderColor="green" 
+                            border ="2px"
+                            rows={10}
+                            cols={40}
+                            >
+                        </Textarea>
                     </Center>
                 </VStack>
                 <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
@@ -223,7 +242,13 @@ function FurnitureForm() {
 
                     <Center>
                         <Text p={5}>Description</Text>
-                        <Input borderColor="green" border ="2px"></Input>
+                        <Textarea
+                            borderColor="green" 
+                            border ="2px"
+                            rows={10}
+                            cols={40}
+                            >
+                        </Textarea>
                     </Center>
                 </VStack>
                 <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
@@ -259,7 +284,13 @@ function AppliancesForm() {
 
                     <Center>
                         <Text p={5}>Description</Text>
-                        <Input borderColor="green" border ="2px"></Input>
+                        <Textarea
+                            borderColor="green" 
+                            border ="2px"
+                            rows={10}
+                            cols={40}
+                            >
+                        </Textarea>
                     </Center>
                 </VStack>
                 <Button colorScheme={"green"}><Link to="/home">Create</Link></Button>
