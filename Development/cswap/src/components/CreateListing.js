@@ -82,6 +82,7 @@ function SelectProduct() {
 function TextBookForm() {
     const [formData, setFormData] = useState({});
     const [image, setImage] = useState("");
+    let navigate = useNavigate();
     const updateInput = async (e) => {
         // console.log("Updated "+e.target.name+" with "+e.target.value+" Files "+e.target.files)
         if (e.target.files != null){
@@ -131,6 +132,7 @@ function TextBookForm() {
             imageName: auth.currentUser.uid+"_"+image.name,
             tags: "",
         });
+        navigate("/home", { replace: true });
     }
     
     return (
@@ -172,7 +174,7 @@ function TextBookForm() {
                         </Center>
                         <input type="file" onChange={updateInput}/>
                     </VStack>
-                    <Link to="/home"><Button colorScheme={"green"} onClick="createAListing(formData)" type="submit">Create</Button></Link>  
+                    <Button colorScheme={"green"} onClick="createAListing(formData)" type="submit">Create</Button>  
                 </HStack>
             </form>
         </Stack>
@@ -183,6 +185,7 @@ function TextBookForm() {
 function ApartmentRentalsForm() {
     const [formData, setFormData] = useState({});
     const [image, setImage] = useState("");
+    let navigate = useNavigate();
     const updateInput = async (e) => {
         // console.log("Updated "+e.target.name+" with "+e.target.value+" Files "+e.target.files)
         if (e.target.files != null){
@@ -209,10 +212,10 @@ function ApartmentRentalsForm() {
             price: '',
             imageName: '',
             tag: ''
-        })
+        });
     }
     const uploadImage = ()=>{
-        if(image == null)
+        if(image == null || auth.currentUser.uid == null)
             return;
         const imageRef = ref(storage, `/images/${auth.currentUser.uid+"_"+image.name}`);
         uploadBytes(imageRef, image).then((snapshot) => {
@@ -226,12 +229,14 @@ function ApartmentRentalsForm() {
             UID: auth.currentUser.uid,
             title: formData.title,
             beds: formData.beds,
+            baths: formData.baths,
             description: formData.description || '',
             zip: formData.zip,
             price: formData.price,
             imageName: auth.currentUser.uid+"_"+image.name,
             tags: "",
         });
+        navigate("/home", { replace: true });
     }
     
     return (
@@ -254,6 +259,8 @@ function ApartmentRentalsForm() {
                         <Center>
                             <Text p={5}>Beds</Text>
                             <Input borderColor="green" border ="2px" name='beds' onChange={updateInput} value={formData.beds || ''}></Input>
+                            <Text p={5}>Baths</Text>
+                            <Input borderColor="green" border ="2px" name='baths' onChange={updateInput} value={formData.baths || ''}></Input>
                             <Text p={5}>ZIP</Text>
                             <Input borderColor="green" border ="2px" name='zip' onChange={updateInput} value={formData.zip || ''}></Input>
                         </Center>
@@ -284,6 +291,7 @@ function ApartmentRentalsForm() {
 function ElectronicsForm() {
     const [formData, setFormData] = useState({});
     const [image, setImage] = useState("");
+    let navigate = useNavigate();
     const updateInput = async (e) => {
         // console.log("Updated "+e.target.name+" with "+e.target.value+" Files "+e.target.files)
         if (e.target.files != null){
@@ -379,6 +387,7 @@ function ElectronicsForm() {
 function FurnitureForm() {
     const [formData, setFormData] = useState({});
     const [image, setImage] = useState("");
+    let navigate = useNavigate();
     const updateInput = async (e) => {
         // console.log("Updated "+e.target.name+" with "+e.target.value+" Files "+e.target.files)
         if (e.target.files != null){
@@ -474,6 +483,7 @@ function FurnitureForm() {
 function AppliancesForm() {
     const [formData, setFormData] = useState({});
     const [image, setImage] = useState("");
+    let navigate = useNavigate();
     const updateInput = async (e) => {
         // console.log("Updated "+e.target.name+" with "+e.target.value+" Files "+e.target.files)
         if (e.target.files != null){
