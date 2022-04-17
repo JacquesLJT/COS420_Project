@@ -1,0 +1,71 @@
+class AuthorizedUser
+{
+    * -- * LogOut;
+    * -- * Search;
+    * -- * Filters;
+}
+
+
+class Items
+{
+  name;
+  dateListed;
+  seller;
+  Int price;
+  itemDetails;
+  itemCondition;
+  otherNotes;
+  Pictures pictures;
+    * -- * Search;
+}
+
+class Textbooks
+{
+  ISBN;
+author;
+title;
+isA Items;
+}
+
+class ApartmentRentals
+{
+  address;
+application;
+isA Items;
+}
+
+class Electronics
+{
+  isA Items;
+}
+
+class Furniture
+{
+  isA Items;
+}
+
+class Appliances
+{
+  isA Items;
+}
+
+class LogOut
+{
+  logOut;
+}
+
+class Search
+{
+  search;
+  }
+
+class Filters
+{
+  Textbooks;
+  Appliances;
+  ApartmentRentals;
+  Electronics;
+  Furniture;
+  * -- * Items;
+}
+
