@@ -1,7 +1,7 @@
 import { Center, Text, Box, Image, Badge} from '@chakra-ui/react'
 import {StarIcon} from "@chakra-ui/icons";
 import React, { useEffect, useState } from 'react'
-import { db, storage } from '../firebase';
+import { db, storage } from '../../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
 
@@ -52,8 +52,11 @@ function ApartementProductCard({apartment}) {
     // console.log(apartmentProp.title);
     return (
       <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-        <Image src={apartmentProp.imageUrl} alt={apartmentProp.imageAlt} />
-  
+      <Box name="do" backgroundColor="blackAlpha.200" p={2}>
+        <Center>
+              <Image src={apartmentProp.imageUrl} alt={apartmentProp.imageAlt} width={250} height={128} objectFit='contain'/>  
+        </Center>
+      </Box>
         <Box p='6'>
           <Box display='flex' alignItems='baseline'>
             <Badge borderRadius='full' px='2' colorScheme='teal'>

@@ -14,8 +14,8 @@ import { useUserAuth } from '../context/UserAuthContext';
 import { db } from '../firebase';
 // import Sidebar from './Sidebar';
 import Navbar from './Navbar';
-import ApartmentProductCard from './ApartementProductCard';
-import TextbookProductCard from './TextbookProductCard';
+import ApartmentProductCard from './productCards/ApartementProductCard';
+import TextbookProductCard from './productCards/TextbookProductCard';
 
 //import Sidebar from './Sidebar';
 

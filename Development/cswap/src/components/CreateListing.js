@@ -313,6 +313,7 @@ function ElectronicsForm() {
         setFormData({
             title: '',
             description: '',
+            condition: '',
             zip: '',
             price: '',
             imageName: '',
@@ -334,6 +335,7 @@ function ElectronicsForm() {
             UID: auth.currentUser.uid,
             title: formData.title,
             description: formData.description || '',
+            condition: formData.condition,
             zip: formData.zip,
             price: formData.price,
             imageName: auth.currentUser.uid+"_"+image.name,
@@ -359,8 +361,14 @@ function ElectronicsForm() {
                         </Center>
                         
                         <Center>
+                            <Text p={5}>Condition</Text>
+                            <Select variant='outline'>
+                                <option value='New'>New</option>
+                                <option value='Used'>Used</option>
+                            </Select>
                             <Text p={5}>ZIP</Text>
                             <Input borderColor="green" border ="2px" name='zip' onChange={updateInput} value={formData.zip || ''}></Input>
+                            
                         </Center>
                         
                         <Text>Description</Text>
