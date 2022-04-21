@@ -42,7 +42,9 @@ export default function AcctView() {
         setError(err.message);
       }
     };
-
+    const navigateHome = async =>{
+        navigate("/home");
+    }
     return (
         <Center bg="#013220">
             <Stack boxShadow="md" bg="whiteAlpha.900" p='20' rounded="md">
@@ -167,10 +169,12 @@ export default function AcctView() {
                                 >
                                     Save
                                 </Button>
+                                
                                 <Button
                                     className='cncl-btn'
                                     size='lg'
                                     colorScheme='red'
+                                    onClick={navigateHome}
                                 >
                                     Discard changes
                                 </Button>

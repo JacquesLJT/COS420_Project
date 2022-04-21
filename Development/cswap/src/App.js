@@ -10,7 +10,7 @@ import ForgotPasswordSubmit from './pages/ForgotPasswordSubmit';
 import Appliances from "./pages/Appliances";
 import Electronics from "./pages/Electronics";
 import Furniture from "./pages/Furniture";
-import Rentals from "./pages/Rentals";
+import Apartments from "./pages/Apartments";
 import Textbooks from "./pages/Textbooks";
 import Chat from "./pages/Chat";
 import AcctView from "./pages/AcctView";
@@ -38,11 +38,11 @@ function App() {
           <Route path="/createListing/*" element={<CreateListing/>} />
           <Route path="/ForgotPassword" element={<ForgotPassword/>} />
           <Route path="/ForgotPasswordSubmit" element={<ForgotPasswordSubmit/>} />
-          <Route path="/Appliances" element={<Appliances/>} />
-          <Route path="/Electronics" element={<Electronics/>} />
-          <Route path="/Furniture" element={<Furniture/>} />
-          <Route path="/Rentals" element={<Rentals/>} />
-          <Route path="/Textbooks" element={<Textbooks/>} />
+          <Route path="/appliances" element={<Appliances/>} />
+          <Route path="/electronics" element={<Electronics/>} />
+          <Route path="/furniture" element={<Furniture/>} />
+          <Route path="/apartments" element={<Apartments/>} />
+          <Route path="/textbooks" element={<Textbooks/>} />
           <Route path="/Chat" element={<Chat/>} />
           <Route path="/AcctView" element={<AcctView/>} />
         </Routes>
