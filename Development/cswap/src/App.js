@@ -26,7 +26,7 @@ function App() {
       <UserAuthContextProvider>
         <Routes>
           <Route
-            path="/home"
+            path="/home/*"
             element={
               <ProtectedRoute>
                 <Home />

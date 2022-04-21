@@ -5,15 +5,15 @@ import { db, storage } from '../../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
 
-function ElectronicProductCard({electronic}) {
-  const [electronicProp, setElectronic] = useState([]);
+function ApplianceProductCard({electronic}) {
+  const [applianceProp, setAppliance] = useState([]);
   useEffect(() => {
     loadData()
   }, []);
   const loadData = async () => {
     const storeElectronic = [];
     getDownloadURL(ref(storage, 'images/'+electronic.imageName)).then((url) => { 
-      setElectronic({
+      setAppliance({
         imageUrl: url,
         imageAlt: electronic.description.length > 45 ? electronic.description.substring(0,45)+"..." : electronic.description,
         condition: electronic.condition,
@@ -22,7 +22,7 @@ function ElectronicProductCard({electronic}) {
         reviewCount: 34,
         rating: 4,
       });
-      console.log(electronicProp.title);
+      console.log(applianceProp.title);
     })
     .catch((error) => {
       // A full list of error codes is available at
@@ -53,14 +53,13 @@ function ElectronicProductCard({electronic}) {
       <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
       <Box name="do" backgroundColor="blackAlpha.200" p={2}>
         <Center>
-              <Image src={electronicProp.imageUrl} alt={electronicProp.imageAlt} width={250} height={128} objectFit='contain'/>  
+              <Image src={applianceProp.imageUrl} alt={applianceProp.imageAlt} width={250} height={128} objectFit='contain'/>  
         </Center>
       </Box>
         <Box p='6'>
           <Box display='flex' alignItems='baseline'>
             <Badge borderRadius='full' px='2' colorScheme='teal'>
-              
-              {electronicProp.condition} 
+              {applianceProp.condition} 
             </Badge>
             {/* <Box
               color='gray.500'
@@ -70,7 +69,6 @@ function ElectronicProductCard({electronic}) {
               textTransform='uppercase'
               ml='2'
             >
-              {electronicProp.condition} 
             </Box> */}
           </Box>
   
@@ -81,11 +79,11 @@ function ElectronicProductCard({electronic}) {
             lineHeight='tight'
             isTruncated
           >
-            {electronicProp.title}
+            {applianceProp.title}
           </Box>
   
           <Box>
-            {electronicProp.formattedPrice}
+            {applianceProp.formattedPrice}
           </Box>
   
           <Box display='flex' mt='2' alignItems='center'>
@@ -94,11 +92,11 @@ function ElectronicProductCard({electronic}) {
               .map((_, i) => (
                 <StarIcon
                   key={i}
-                  color={i < electronicProp.rating ? 'teal.500' : 'gray.300'}
+                  color={i < applianceProp.rating ? 'teal.500' : 'gray.300'}
                 />
               ))}
             <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-              {electronicProp.reviewCount} reviews
+              {applianceProp.reviewCount} reviews
             </Box>
           </Box>
         </Box>
@@ -110,4 +108,4 @@ function ElectronicProductCard({electronic}) {
   );
 }
 
-export default ElectronicProductCard
+export default ApplianceProductCard

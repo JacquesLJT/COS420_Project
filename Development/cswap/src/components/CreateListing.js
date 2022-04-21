@@ -22,8 +22,9 @@ import {BiChair} from 'react-icons/bi';
 import { Switch, Routes, Route, Navigate, Link,} from 'react-router-dom';
 import { useNavigate } from 'react-router';
 import { db, storage, auth } from '../firebase';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { ref, uploadBytes } from 'firebase/storage';
+import { date } from 'yup';
 
 
 function SelectProduct() {
@@ -70,7 +71,7 @@ function SelectProduct() {
                         boxShadow="lg" 
                         colorScheme="green" 
                         variant="outline">
-                        appliances
+                        Appliances
                     </Button></Link>   
                 </VStack>
                 <Button colorScheme={"green"} visibility={'hidden'}>Next</Button>
@@ -83,6 +84,7 @@ function TextBookForm() {
     const [formData, setFormData] = useState({});
     const [image, setImage] = useState("");
     let navigate = useNavigate();
+    var numOfDocs = 0;
     const updateInput = async (e) => {
         // console.log("Updated "+e.target.name+" with "+e.target.value+" Files "+e.target.files)
         if (e.target.files != null){
@@ -111,17 +113,19 @@ function TextBookForm() {
             tag: ''
         })
     }
-    const uploadImage = ()=>{
+    const uploadImage = async ()=>{
         if(image == null)
             return;
-        const imageRef = ref(storage, `/images/${auth.currentUser.uid+"_"+image.name}`);
+        const querySnapshot = await getDocs(collection(db, "textbooks"));
+        numOfDocs = querySnapshot.size;
+        const imageRef = ref(storage, `/images/${"text_"+auth.currentUser.uid+"_"+ numOfDocs+"_"+image.name}`);
         uploadBytes(imageRef, image).then((snapshot) => {
             console.log('Uploaded a blob or file!');
         });
     }
     const createAListing = async (formData) => {
         // console.log(formData);
-        uploadImage()
+        await uploadImage();
         const docRef = await addDoc(collection(db, "textbooks"), {
             UID: auth.currentUser.uid,
             title: formData.title,
@@ -129,7 +133,7 @@ function TextBookForm() {
             description: formData.description || '',
             zip: formData.zip,
             price: formData.price,
-            imageName: auth.currentUser.uid+"_"+image.name,
+            imageName: "text_"+auth.currentUser.uid+"_"+ numOfDocs+"_"+image.name,
             tags: "",
         });
         navigate("/home", { replace: true });
@@ -186,6 +190,7 @@ function ApartmentRentalsForm() {
     const [formData, setFormData] = useState({});
     const [image, setImage] = useState("");
     let navigate = useNavigate();
+    var numOfDocs = 0;
     const updateInput = async (e) => {
         // console.log("Updated "+e.target.name+" with "+e.target.value+" Files "+e.target.files)
         if (e.target.files != null){
@@ -214,18 +219,20 @@ function ApartmentRentalsForm() {
             tag: ''
         });
     }
-    const uploadImage = ()=>{
+    const uploadImage = async ()=>{
         if(image == null || auth.currentUser.uid == null)
             return;
-        const imageRef = ref(storage, `/images/${auth.currentUser.uid+"_"+image.name}`);
+        const querySnapshot = await getDocs(collection(db, "apartments"));
+        numOfDocs = querySnapshot.size;
+        const imageRef = ref(storage, `/images/${"apar_"+auth.currentUser.uid+"_"+ numOfDocs+"_"+image.name}`);
         uploadBytes(imageRef, image).then((snapshot) => {
             console.log('Uploaded a blob or file!');
         });
     }
     const createAListing = async (formData) => {
         // console.log(formData);
-        uploadImage()
-        const docRef = await addDoc(collection(db, "apartmentrentals"), {
+        await uploadImage();
+        const docRef = await addDoc(collection(db, "apartments"), {
             UID: auth.currentUser.uid,
             title: formData.title,
             beds: formData.beds,
@@ -233,7 +240,7 @@ function ApartmentRentalsForm() {
             description: formData.description || '',
             zip: formData.zip,
             price: formData.price,
-            imageName: auth.currentUser.uid+"_"+image.name,
+            imageName: "apar_"+auth.currentUser.uid+"_"+ numOfDocs+"_"+image.name,
             tags: "",
         });
         navigate("/home", { replace: true });
@@ -292,6 +299,7 @@ function ElectronicsForm() {
     const [formData, setFormData] = useState({});
     const [image, setImage] = useState("");
     let navigate = useNavigate();
+    var numOfDocs = 0;
     const updateInput = async (e) => {
         // console.log("Updated "+e.target.name+" with "+e.target.value+" Files "+e.target.files)
         if (e.target.files != null){
@@ -320,37 +328,40 @@ function ElectronicsForm() {
             tag: ''
         })
     }
-    const uploadImage = ()=>{
+    const uploadImage = async ()=>{
         if(image == null)
             return;
-        const imageRef = ref(storage, `/images/${auth.currentUser.uid+"_"+image.name}`);
+        const querySnapshot = await getDocs(collection(db, "electronics"));
+        numOfDocs = querySnapshot.size;
+        const imageRef = ref(storage, `/images/${"elec_"+auth.currentUser.uid+"_"+ numOfDocs+"_"+image.name}`);
         uploadBytes(imageRef, image).then((snapshot) => {
             console.log('Uploaded a blob or file!');
         });
     }
     const createAListing = async (formData) => {
         // console.log(formData);
-        uploadImage()
+        await uploadImage();
         const docRef = await addDoc(collection(db, "electronics"), {
             UID: auth.currentUser.uid,
             title: formData.title,
             description: formData.description || '',
-            condition: formData.condition,
+            condition: formData.condition || '',
             zip: formData.zip,
             price: formData.price,
-            imageName: auth.currentUser.uid+"_"+image.name,
+            imageName: "elec_"+auth.currentUser.uid+"_"+ numOfDocs+"_"+image.name,
             tags: "",
         });
+        navigate("/home", { replace: true });
     }
     
     return (
         <Stack boxShadow="md" bg="whiteAlpha.900" p='10' rounded="md" w="50%" >  
              <Center mb='10'>
-                    <Heading as={'h1'} size={'xl'} colorScheme="green">Add Electronics</Heading>
+                    <Heading as={'h1'} size={'xl'} colorScheme="green">Add Electronic</Heading>
             </Center>
             <form onSubmit={handleSubmit}>
                 <HStack>
-                <Link to="/createListing"><Button colorScheme={"green"}>Back</Button></Link> 
+                    <Link to="/createListing"><Button colorScheme={"green"}>Back</Button></Link> 
                     <VStack spacing={5} p={10}>
                         <Center>
                             <Text p={5}>Title</Text>
@@ -361,14 +372,12 @@ function ElectronicsForm() {
                         </Center>
                         
                         <Center>
-                            <Text p={5}>Condition</Text>
-                            <Select variant='outline'>
-                                <option value='New'>New</option>
-                                <option value='Used'>Used</option>
+                            <Select onChange={(e)=>formData.condition=e.target.value} placeholder = 'Condition'>
+                                <option value={'New'}>New</option>
+                                <option value={'Used'}>Used</option>
                             </Select>
                             <Text p={5}>ZIP</Text>
                             <Input borderColor="green" border ="2px" name='zip' onChange={updateInput} value={formData.zip || ''}></Input>
-                            
                         </Center>
                         
                         <Text>Description</Text>
@@ -386,7 +395,7 @@ function ElectronicsForm() {
                         </Center>
                         <input type="file" onChange={updateInput}/>
                     </VStack>
-                    <Link to="/home"><Button colorScheme={"green"} onClick="createAListing(formData)" type="submit">Create</Button></Link>
+                    <Button colorScheme={"green"} onClick="createAListing(formData)" type="submit">Create</Button> 
                 </HStack>
             </form>
         </Stack>
@@ -396,6 +405,7 @@ function FurnitureForm() {
     const [formData, setFormData] = useState({});
     const [image, setImage] = useState("");
     let navigate = useNavigate();
+    var numOfDocs = 0;
     const updateInput = async (e) => {
         // console.log("Updated "+e.target.name+" with "+e.target.value+" Files "+e.target.files)
         if (e.target.files != null){
@@ -417,32 +427,37 @@ function FurnitureForm() {
         setFormData({
             title: '',
             description: '',
+            condition: '',
             zip: '',
             price: '',
             imageName: '',
             tag: ''
         })
     }
-    const uploadImage = ()=>{
+    const uploadImage = async ()=>{
         if(image == null)
             return;
-        const imageRef = ref(storage, `/images/${auth.currentUser.uid+"_"+image.name}`);
+        const querySnapshot = await getDocs(collection(db, "furniture"));
+        numOfDocs = querySnapshot.size;
+        const imageRef = ref(storage, `/images/${"furn_"+auth.currentUser.uid+"_"+ numOfDocs+"_"+image.name}`);
         uploadBytes(imageRef, image).then((snapshot) => {
             console.log('Uploaded a blob or file!');
         });
     }
     const createAListing = async (formData) => {
         // console.log(formData);
-        uploadImage()
+        await uploadImage();
         const docRef = await addDoc(collection(db, "furniture"), {
             UID: auth.currentUser.uid,
             title: formData.title,
             description: formData.description || '',
+            condition: formData.condition || '',
             zip: formData.zip,
             price: formData.price,
-            imageName: auth.currentUser.uid+"_"+image.name,
+            imageName: "furn_"+auth.currentUser.uid+"_"+ numOfDocs+"_"+image.name,
             tags: "",
         });
+        navigate("/home", { replace: true });
     }
     
     return (
@@ -463,6 +478,10 @@ function FurnitureForm() {
                         </Center>
                         
                         <Center>
+                            <Select onChange={(e)=>{formData.condition=e.target.value; console.log(date);}} placeholder = 'Condition'>
+                                <option value={'New'}>New</option>
+                                <option value={'Used'}>Used</option>
+                            </Select>
                             <Text p={5}>ZIP</Text>
                             <Input borderColor="green" border ="2px" name='zip' onChange={updateInput} value={formData.zip || ''}></Input>
                         </Center>
@@ -482,7 +501,7 @@ function FurnitureForm() {
                         </Center>
                         <input type="file" onChange={updateInput}/>
                     </VStack>
-                    <Link to="/home"><Button colorScheme={"green"} onClick="createAListing(formData)" type="submit">Create</Button></Link>
+                    <Button colorScheme={"green"} onClick="createAListing(formData)" type="submit">Create</Button> 
                 </HStack>
             </form>
         </Stack>
@@ -492,6 +511,7 @@ function AppliancesForm() {
     const [formData, setFormData] = useState({});
     const [image, setImage] = useState("");
     let navigate = useNavigate();
+    var numOfDocs = 0;
     const updateInput = async (e) => {
         // console.log("Updated "+e.target.name+" with "+e.target.value+" Files "+e.target.files)
         if (e.target.files != null){
@@ -513,32 +533,37 @@ function AppliancesForm() {
         setFormData({
             title: '',
             description: '',
+            condition: '',
             zip: '',
             price: '',
             imageName: '',
             tag: ''
         })
     }
-    const uploadImage = ()=>{
+    const uploadImage = async ()=>{
         if(image == null)
             return;
-        const imageRef = ref(storage, `/images/${auth.currentUser.uid+"_"+image.name}`);
+        const querySnapshot = await getDocs(collection(db, "appliances"));
+        numOfDocs = querySnapshot.size;
+        const imageRef = ref(storage, `/images/${"appl_"+auth.currentUser.uid+"_"+ numOfDocs+"_"+image.name}`);
         uploadBytes(imageRef, image).then((snapshot) => {
             console.log('Uploaded a blob or file!');
         });
     }
     const createAListing = async (formData) => {
         // console.log(formData);
-        uploadImage()
+        await uploadImage();
         const docRef = await addDoc(collection(db, "appliances"), {
             UID: auth.currentUser.uid,
             title: formData.title,
             description: formData.description || '',
+            condition: formData.condition || '',
             zip: formData.zip,
             price: formData.price,
-            imageName: auth.currentUser.uid+"_"+image.name,
+            imageName: "appl_"+auth.currentUser.uid+"_"+ numOfDocs+"_"+image.name,
             tags: "",
         });
+        navigate("/home", { replace: true });
     }
     
     return (
@@ -559,6 +584,10 @@ function AppliancesForm() {
                         </Center>
                         
                         <Center>
+                            <Select onChange={(e)=>formData.condition=e.target.value} placeholder = 'Condition'>
+                                <option value={'New'}>New</option>
+                                <option value={'Used'}>Used</option>
+                            </Select>
                             <Text p={5}>ZIP</Text>
                             <Input borderColor="green" border ="2px" name='zip' onChange={updateInput} value={formData.zip || ''}></Input>
                         </Center>
@@ -578,7 +607,7 @@ function AppliancesForm() {
                         </Center>
                         <input type="file" onChange={updateInput}/>
                     </VStack>
-                    <Link to="/home"><Button colorScheme={"green"} onClick="createAListing(formData)" type="submit">Create</Button></Link>
+                    <Button colorScheme={"green"} onClick="createAListing(formData)" type="submit">Create</Button> 
                 </HStack>
             </form>
         </Stack>
