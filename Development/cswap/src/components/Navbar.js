@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom';
 
 function  navbar () {
   return (
-    <div> 
         <Flex
             mb={0}
             p={6}
@@ -23,6 +22,7 @@ function  navbar () {
             borderBottomColor="green.800"
             height={100}
             position="fixed"
+            zIndex={100}
             >
                 <Box 
                     align="left" 
@@ -94,7 +94,6 @@ function  navbar () {
                     <LogoutBtn/>
                 </Box> 
         </Flex>
-    </div>
    )
 }
  
