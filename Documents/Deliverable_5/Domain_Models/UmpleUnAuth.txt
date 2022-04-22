@@ -1,4 +1,4 @@
-class UnAuthorized_User
+class Authentication
 {
   email;
   password;
@@ -6,21 +6,32 @@ class UnAuthorized_User
 
 class Login
 {
-   Email email;
+     isA Authentication;
+Email email;
    Password password;
-   Function loginEmail;
-   Function loginGoogle;
-   Function loginFacebook;
-   
-  * -- * UnAuthorized_User;
+  public void loginEmail(){
+    return
+  }
+  public void loginGoogle(){
+    return
+  }
+  public void loginFacebook(){
+    return
+  }
   }
 
 class Signup
 {
-   Email email;
+     isA Authentication;
+Email email;
    Password password;
-   Function signupEmail;
-   Function loginGoogle;
-   Function loginFacebook;
-  * -- * UnAuthorized_User;
-}
+  public void signupEmail(){
+    return
+  }
+  public void loginGoogle(){
+    return
+  }
+  public void loginFacebook(){
+    return
+  }
+ }
