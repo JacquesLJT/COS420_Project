@@ -57,7 +57,7 @@ function ForgotPasswordSubmit() {
 
             <Center>    
                 <Button colorScheme="green" variant="link">
-                    <Link to="/">Back to Lgin</Link>
+                    <Link to="/">Back to Login</Link>
                 </Button>
             </Center>
 

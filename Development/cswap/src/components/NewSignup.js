@@ -15,7 +15,6 @@ import {
 } from '@chakra-ui/react';
 import { Formik, Form } from 'formik';
 import {AtSignIcon, LockIcon} from "@chakra-ui/icons";
-import yup from 'yup';
 
 export default function NewSignup() {
   const [email, setEmail] = useState('');

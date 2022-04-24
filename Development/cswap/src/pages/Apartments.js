@@ -1,4 +1,3 @@
-
 import { 
   Center,
   Heading, 
@@ -12,38 +11,37 @@ import {
 import { collection, getDocs } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
-import Navbar from '../components/Navbar';
-import TextbookProductCard from '../components/productCards/TextbookProductCard';
 import { useUserAuth } from '../context/UserAuthContext';
 import { db } from '../firebase';
 
-const Textbooks = () => {
+import ApartmentProductCard from '../components/productCards/ApartementProductCard';
+import Navbar from '../components/Navbar';
+
+const Apartments = () => {
   const { logOut, user } = useUserAuth();
   const navigate = useNavigate();
   const handleCreateListing = async e => {
     navigate('/createListing');
   };
-  const [textbookPosts, setTextbookPosts] = useState([]);
+  const [apartmentPosts, setApartmentPosts] = useState([]);
   useEffect(() => {
     getProducts();
   }, []);
 
   const getProducts = async () => {
-    const getTextbooks = [];
-
-    var querySnapshot = await getDocs(collection(db, "textbooks"));
+    const getApartments = [];
+    var querySnapshot = await getDocs(collection(db, "apartments"));
     querySnapshot.forEach((doc) => {
-      getTextbooks.push({...doc.data(), key: doc.id});
+      getApartments.push({...doc.data(), key: doc.id});
     });
-
-    setTextbookPosts(getTextbooks);
+    setApartmentPosts(getApartments);
   }
   
   return (
     <div>
       <Navbar/>
       <Center mb='10'>
-        <Heading as={'h1'} size={'xl'} colorScheme="green" mt={110}>Textbooks</Heading>
+        <Heading as={'h1'} size={'xl'} colorScheme="green" mt={110}>Aparments</Heading>
       </Center>
       <HStack>
         <VStack p={10}>
@@ -66,14 +64,13 @@ const Textbooks = () => {
             width={'100%'}
             p={5}>
               <HStack justify="center" mb={10}>
-                {textbookPosts.length > 0 ? (textbookPosts.map((post) => 
-                  <TextbookProductCard textbook={post}></TextbookProductCard>)) : <h1>No Textbooks</h1>}
+                {apartmentPosts.length > 0 ? (apartmentPosts.map((post) => 
+                <ApartmentProductCard apartment={post}></ApartmentProductCard>)) : <h1>No Apartments</h1>}
               </HStack>
-          </Box>
+            </Box>
           </div>
         </HStack>
     </div>
   );
 };
-
-export default Textbooks
+export default Apartments

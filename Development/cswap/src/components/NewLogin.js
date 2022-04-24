@@ -15,6 +15,8 @@ import { Formik, Form } from 'formik';
 import {AtSignIcon, LockIcon} from "@chakra-ui/icons";
 import { useUserAuth } from '../context/UserAuthContext';
 import { FaFacebookSquare, FaGoogle } from 'react-icons/fa';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../firebase';
 // import './Login.css';
 
 export default function NewLogin() {
