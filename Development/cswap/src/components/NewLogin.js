@@ -15,8 +15,9 @@ import { Formik, Form } from 'formik';
 import {AtSignIcon, LockIcon} from "@chakra-ui/icons";
 import { useUserAuth } from '../context/UserAuthContext';
 import { FaFacebookSquare, FaGoogle } from 'react-icons/fa';
-import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../firebase';
+import { doc, addDoc, collection } from "firebase/firestore";
+import { auth, db } from "../firebase";
+
 // import './Login.css';
 
 export default function NewLogin() {
@@ -36,11 +37,22 @@ export default function NewLogin() {
         setError(err.message);
       }
     };
-  
+
     const handleGoogleSignIn = async e => {
       e.preventDefault();
       try {
-        await googleSignIn();
+        await googleSignIn();   //TODO: Check if email already exists
+        await addDoc(collection(db, 'users'), {
+            UID: auth.currentUser.uid,
+            displayName: auth.currentUser.displayName,
+            photoURL: auth.currentUser.photoURL,
+            email: auth.currentUser.email,
+            emailVerified: true,
+            authProvider: 'google',
+            phoneNumber: auth.currentUser.phoneNumber,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        });
         navigate('/home');
       } catch (error) {
         console.log(error.message);
@@ -51,6 +63,19 @@ export default function NewLogin() {
       e.preventDefault();
       try {
         await facebookSignIn();
+        if (auth.currentUser.uid == null) {
+            await addDoc(collection(db, "users"), {
+                UID: auth.currentUser.uid,
+                displayName: auth.currentUser.displayName,
+                photoURL: auth.currentUser.photoURL,
+                email: auth.currentUser.email,
+                emailVerified: auth.currentUser.emailVerified,
+                authProvider: 'facebook',
+                phoneNumber: auth.currentUser.phoneNumber,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            });
+        }
         navigate('/home');
       } catch (error) {
         console.log(error.message);

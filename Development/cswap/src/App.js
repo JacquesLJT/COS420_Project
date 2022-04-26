@@ -13,7 +13,7 @@ import Furniture from "./pages/Furniture";
 import Apartments from "./pages/Apartments";
 import Textbooks from "./pages/Textbooks";
 import Chat from "./pages/Chat";
-import AcctView from "./pages/AcctView";
+import AcctSettings from "./pages/AcctSettings";
 
 import './App.css';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -44,7 +44,7 @@ function App() {
           <Route path="/apartments" element={<Apartments/>} />
           <Route path="/textbooks" element={<Textbooks/>} />
           <Route path="/Chat" element={<Chat/>} />
-          <Route path="/AcctView" element={<AcctView/>} />
+          <Route path="/AcctSettings" element={<AcctSettings/>} />
         </Routes>
       </UserAuthContextProvider>
     </ChakraProvider>

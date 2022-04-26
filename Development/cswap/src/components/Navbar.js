@@ -89,7 +89,7 @@ function  navbar () {
                         ml={5}
                         mr={5}
                     >
-                        <Link to="/AcctView">
+                        <Link to="/AcctSettings">
                             <Button 
                             boxShadow="lg" 
                             colorScheme="green"
