@@ -19,7 +19,7 @@ import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../firebase';
 import { getAuth } from "firebase/auth";
 
-export default function AcctView() {
+export default function AcctSettings() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');

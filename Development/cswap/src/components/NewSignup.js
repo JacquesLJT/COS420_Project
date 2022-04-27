@@ -15,6 +15,8 @@ import {
 } from '@chakra-ui/react';
 import { Formik, Form } from 'formik';
 import {AtSignIcon, LockIcon} from "@chakra-ui/icons";
+import { addDoc, collection } from "firebase/firestore";
+import { auth, db } from "../firebase";
 
 export default function NewSignup() {
   const [email, setEmail] = useState('');
@@ -34,6 +36,16 @@ export default function NewSignup() {
     try {
         setError('');
         await signUp(email, password);
+        await addDoc(collection(db, "users"), {
+            UID: auth.currentUser.uid,
+            displayName: auth.currentUser.displayName,
+            photoURL: auth.currentUser.photoURL,
+            email: email,
+            emailVerified: auth.currentUser.emailVerified,
+            phoneNumber: auth.currentUser.phoneNumber,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        });
         navigate('/');
     } catch (err) {
         setError(err.message);

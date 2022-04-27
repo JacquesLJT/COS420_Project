@@ -14,15 +14,18 @@ import { addDoc, collection } from "firebase/firestore";
 
 const userAuthContext = createContext();
 
+
 export function UserAuthContextProvider({ children }) {
   const [user, setUser] = useState({});
 
   function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
   }
+
   function signUp(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
   }
+
   function logOut() {
     return signOut(auth);
   }
