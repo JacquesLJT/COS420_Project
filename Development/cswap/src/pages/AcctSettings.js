@@ -42,8 +42,8 @@ export default function AcctSettings() {
         setError(err.message);
       }
     };
-    const navigateHome = async =>{
-        navigate("/home");
+    const navigateAccount = async =>{
+        navigate("/Account");
     }
     return (
         <Center bg="#013220">
@@ -174,7 +174,7 @@ export default function AcctSettings() {
                                     className='cncl-btn'
                                     size='lg'
                                     colorScheme='red'
-                                    onClick={navigateHome}
+                                    onClick={navigateAccount}
                                 >
                                     Discard changes
                                 </Button>

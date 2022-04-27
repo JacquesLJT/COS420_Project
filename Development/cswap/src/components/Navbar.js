@@ -8,8 +8,15 @@ import React from 'react'
 import LogoutBtn from './LogoutBtn';
 import { Link } from 'react-router-dom';
 import { MdAccountCircle} from 'react-icons/md';
+import {FiSettings} from 'react-icons/fi';
+import { getAuth } from 'firebase/auth';
 
 function  navbar () {
+    const getUID = getAuth().currentUser.uid;
+    // const navigateAccount = uid => {
+    //     navigate("/Account")
+    // }
+
   return (
         <Flex
             mb={0}
@@ -89,15 +96,26 @@ function  navbar () {
                         ml={5}
                         mr={5}
                     >
-                        <Link to="/AcctSettings">
                             <Button 
                             boxShadow="lg" 
                             colorScheme="green"
                             variant={"outline"}
                             borderColor="blackAlpha.300"><MdAccountCircle size={"20px"}/>
+                            {/*WIP PASSING UID     onClick={getAuth().currentUser.uid} */}
                             </Button>
-                        </Link>
                     </Box>
+
+                <Box ml={5} mr={5}>
+                    <Link to="/AcctSettings">
+                        <Button
+                        size='lg'
+                        colorScheme='green'
+                        variant={"outline"}
+                        borderColor="blackAlpha.300"><FiSettings size={"20px"}/>
+                        </Button>
+                    </Link>
+                </Box>
+
                 <Box align="right">
                     <LogoutBtn/>
                 </Box> 

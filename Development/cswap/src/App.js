@@ -13,6 +13,7 @@ import Furniture from "./pages/Furniture";
 import Apartments from "./pages/Apartments";
 import Textbooks from "./pages/Textbooks";
 import Chat from "./pages/Chat";
+import Accounts from "./pages/Accounts"
 import AcctSettings from "./pages/AcctSettings";
 
 import './App.css';
@@ -44,6 +45,7 @@ function App() {
           <Route path="/apartments" element={<Apartments/>} />
           <Route path="/textbooks" element={<Textbooks/>} />
           <Route path="/Chat" element={<Chat/>} />
+          <Route path="/Accounts" element={<Accounts/>} />
           <Route path="/AcctSettings" element={<AcctSettings/>} />
         </Routes>
       </UserAuthContextProvider>
