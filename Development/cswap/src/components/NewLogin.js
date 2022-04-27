@@ -79,7 +79,7 @@ export default function NewLogin() {
                     initialValues={{ email: '', password: '' }}
                 >
                     {({ isSubmitting }) => (
-                        <Form onSubmit={handleSubmit}>
+                        <Form onSubmit={handleSubmit} data-testid = "form">
                             <Stack my="4" spacing="6">
                                 <InputGroup>
                                     <InputLeftAddon borderColor='gray.300' boxShadow='4px 3px 5px #ccc9c6' children={<AtSignIcon/>}/>
@@ -115,6 +115,7 @@ export default function NewLogin() {
                                     size="lg"
                                     colorScheme="green"
                                     type="submit"
+                                    data-testid="submit"
                                 >
                                     Sign in
                                 </Button>
@@ -124,6 +125,7 @@ export default function NewLogin() {
                                     colorScheme="blue"
                                     onClick={handleGoogleSignIn}
                                     leftIcon={<FaGoogle />}
+                                    data-testid="google-signin"
                                 >
                                     Login with Google
                                 </Button>
@@ -133,6 +135,7 @@ export default function NewLogin() {
                                     colorScheme='blue'
                                     onClick={handleFacebookSignIn}
                                     leftIcon={<FaFacebookSquare size={40} />}
+                                    data-testid="facebook-signin"
                                 >
                                     Login with Facebook
                                 </Button>
