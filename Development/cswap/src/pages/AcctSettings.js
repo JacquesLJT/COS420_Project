@@ -16,8 +16,8 @@ import { Checkbox, CheckboxGroup } from '@chakra-ui/react';
 import {AtSignIcon, LockIcon, InfoIcon, ChatIcon} from "@chakra-ui/icons";
 import { useUserAuth } from '../context/UserAuthContext';
 import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../firebase';
-import { getAuth } from "firebase/auth";
+import { doc, getDoc, setDoc} from "firebase/firestore";
+import { auth, db } from "../firebase";
 
 export default function AcctSettings() {
     const [email, setEmail] = useState('');
@@ -25,12 +25,11 @@ export default function AcctSettings() {
     const [error, setError] = useState('');
     const { logIn} = useUserAuth();
     const navigate = useNavigate();
-    const auth = getAuth();
     const user = auth.currentUser;
     const displayName = user.displayName;
     const userEmail = user.email;
     const photoURL = user.photoURL;
-    //add const for user number
+    const phone = user.phoneNumber; //TODO: Add other shit
 
     const handleSubmit = async e => {
       e.preventDefault();

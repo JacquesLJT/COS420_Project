@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { MdAccountCircle} from 'react-icons/md';
 import {FiSettings} from 'react-icons/fi';
 import { getAuth } from 'firebase/auth';
+//import { auth, db } from "../firebase";     // To just get UID, use auth.currentUser.uid with this import
 
 function  navbar () {
     const getUID = getAuth().currentUser.uid;

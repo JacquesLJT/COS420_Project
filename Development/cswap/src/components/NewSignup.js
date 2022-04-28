@@ -17,7 +17,6 @@ import { Formik, Form } from 'formik';
 import {AtSignIcon, LockIcon} from "@chakra-ui/icons";
 import { doc, getDoc, setDoc} from "firebase/firestore";
 import { auth, db } from "../firebase";
-import { isEmpty } from '@firebase/util';
 
 export default function NewSignup() {
   const [email, setEmail] = useState('');

@@ -1,10 +1,10 @@
 import { 
     Center,
     Stack,
-    Text, 
+    Text,
     Button,
-    Input, 
-    InputLeftAddon, 
+    Input,
+    InputLeftAddon,
     InputGroup,
     Alert,
     Image
@@ -65,7 +65,7 @@ export default function NewLogin() {
         console.log(error.message);
       }
     };
-  
+
     const handleFacebookSignIn = async e => {
       e.preventDefault();
       try {
