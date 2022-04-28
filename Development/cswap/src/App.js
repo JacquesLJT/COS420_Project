@@ -45,7 +45,7 @@ function App() {
           <Route path="/apartments" element={<Apartments/>} />
           <Route path="/textbooks" element={<Textbooks/>} />
           <Route path="/Chat" element={<Chat/>} />
-          <Route path="/Accounts" element={<Accounts/>} />
+          <Route path="/accounts/*" element={<Accounts/>} />
           <Route path="/AcctSettings" element={<AcctSettings/>} />
         </Routes>
       </UserAuthContextProvider>

@@ -11,10 +11,10 @@ import { MdAccountCircle} from 'react-icons/md';
 import {FiSettings} from 'react-icons/fi';
 import { getAuth } from 'firebase/auth';
 import { auth, db } from "../firebase";     
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 
-function  navbar () {
+function Navbar () {
     const uid = auth.currentUser.uid;
    
 
@@ -97,13 +97,15 @@ function  navbar () {
                         ml={5}
                         mr={5}
                     >
+                        <Link to={`/accounts/${uid}`}>
                             <Button 
                             boxShadow="lg" 
                             colorScheme="green"
                             variant={"outline"}
                             borderColor="blackAlpha.300"><MdAccountCircle size={"20px"}
-                            onClick={navigate(`accounts/${uid}`)}/>
+                            />
                             </Button>
+                        </Link>
                     </Box>
 
                 <Box ml={5} mr={5}>
@@ -124,4 +126,4 @@ function  navbar () {
    )
 }
  
-export default navbar
+export default Navbar
