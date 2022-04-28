@@ -10,13 +10,13 @@ import { Link } from 'react-router-dom';
 import { MdAccountCircle} from 'react-icons/md';
 import {FiSettings} from 'react-icons/fi';
 import { getAuth } from 'firebase/auth';
-//import { auth, db } from "../firebase";     // To just get UID, use auth.currentUser.uid with this import
+import { auth, db } from "../firebase";     
+import { useNavigate } from 'react-router';
+
 
 function  navbar () {
-    const getUID = getAuth().currentUser.uid;
-    // const navigateAccount = uid => {
-    //     navigate("/Account")
-    // }
+    const uid = auth.currentUser.uid;
+   
 
   return (
         <Flex
@@ -101,8 +101,8 @@ function  navbar () {
                             boxShadow="lg" 
                             colorScheme="green"
                             variant={"outline"}
-                            borderColor="blackAlpha.300"><MdAccountCircle size={"20px"}/>
-                            {/*WIP PASSING UID     onClick={getAuth().currentUser.uid} */}
+                            borderColor="blackAlpha.300"><MdAccountCircle size={"20px"}
+                            onClick={navigate(`accounts/${uid}`)}/>
                             </Button>
                     </Box>
 
