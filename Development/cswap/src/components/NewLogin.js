@@ -15,9 +15,9 @@ import { Formik, Form } from 'formik';
 import {AtSignIcon, LockIcon} from "@chakra-ui/icons";
 import { useUserAuth } from '../context/UserAuthContext';
 import { FaFacebookSquare, FaGoogle } from 'react-icons/fa';
-import { doc, setDoc, getDoc, addDoc, collection } from "firebase/firestore";
+import { doc, setDoc, getDoc} from "firebase/firestore";
 import { auth, db } from "../firebase";
-import { isEmpty } from '@firebase/util';
+
 
 // import './Login.css';
 
@@ -56,10 +56,10 @@ export default function NewLogin() {
         let docRef = doc(db, `users/${auth.currentUser.uid}`);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            navigate('/');
+            navigate('/home');
         } else {
             await setDoc (docRef, {userData});
-            navigate('/');
+            navigate('/home');
         }
       } catch (error) {
         console.log(error.message);
@@ -83,10 +83,10 @@ export default function NewLogin() {
         let docRef = doc(db, `users/${auth.currentUser.uid}`);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            navigate('/');
+            navigate('/home');
         } else {
             await setDoc (docRef, {userData});
-            navigate('/');
+            navigate('/home');
         }
       } catch (error) {
         console.log(error.message);
