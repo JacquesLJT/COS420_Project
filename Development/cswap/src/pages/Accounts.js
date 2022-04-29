@@ -17,11 +17,11 @@ import {
   import { auth, db } from "../firebase";
   import { collection, getDocs } from 'firebase/firestore';
   
-  import TextbookProductCard from './productCards/TextbookProductCard';
-  import ApartmentProductCard from './productCards/ApartementProductCard';
-  import ElectronicProductCard from './productCards/ElectronicProductCard';
-  import FurnitureProductCard from './productCards/FurnitureProductCard';
-  import ApplianceProductCard from './productCards/ApplianceProductCard';
+  // import TextbookProductCard from './productCards/TextbookProductCard';      THIS IS FOR ADDING LISTINGS TO THE ACCOUNT PAGE NON-OPERATIONAL
+  // import ApartmentProductCard from './productCards/ApartementProductCard';
+  // import ElectronicProductCard from './productCards/ElectronicProductCard';
+  // import FurnitureProductCard from './productCards/FurnitureProductCard';
+  // import ApplianceProductCard from './productCards/ApplianceProductCard';
 
 
 
@@ -35,53 +35,53 @@ const Account = () => {
 
 
 
-    const [apartmentPosts, setApartmentPosts] = useState([]);
-    const [textbookPosts, setTextbookPosts] = useState([]);
-    const [electronicPosts, setElectronicPosts] = useState([]);
-    const [appliancePosts, setAppliancePosts] = useState([]);
-    const [furniturePosts, setFurniturePosts] = useState([]);
-    useEffect(() => {
-      getProducts();
-    }, []);
+    // const [apartmentPosts, setApartmentPosts] = useState([]);      THIS IS FOR ADDING LISTINGS TO THE ACCOUNT PAGE NON-OPERATIONAL
+    // const [textbookPosts, setTextbookPosts] = useState([]);
+    // const [electronicPosts, setElectronicPosts] = useState([]);
+    // const [appliancePosts, setAppliancePosts] = useState([]);
+    // const [furniturePosts, setFurniturePosts] = useState([]);
+    // useEffect(() => {
+    //   getProducts();
+    // }, []);
   
-    const getProducts = async () => {
-      const getApartments = [];
-      const getTextbooks = [];
-      const getElectronics = [];
-      const getFurniture = [];
-      const getAppliances = [];
+    // const getProducts = async () => {
+    //   const getApartments = [];
+    //   const getTextbooks = [];
+    //   const getElectronics = [];
+    //   const getFurniture = [];
+    //   const getAppliances = [];
   
-      var querySnapshot = await getDocs(collection(db, "textbooks"));
-      querySnapshot.forEach((doc) => {
-        getTextbooks.push({...doc.data(), key: doc.id});
-      });
+    //   var querySnapshot = await getDocs(collection(db, "textbooks"));
+    //   querySnapshot.forEach((doc) => {
+    //     getTextbooks.push({...doc.data(), key: doc.id});
+    //   });
   
-      var querySnapshot = await getDocs(collection(db, "apartments"));
-      querySnapshot.forEach((doc) => {
-        getApartments.push({...doc.data(), key: doc.id});
-      });
+    //   var querySnapshot = await getDocs(collection(db, "apartments"));
+    //   querySnapshot.forEach((doc) => {
+    //     getApartments.push({...doc.data(), key: doc.id});
+    //   });
   
-      var querySnapshot = await getDocs(collection(db, "electronics"));
-      querySnapshot.forEach((doc) => {
-        getElectronics.push({...doc.data(), key: doc.id});
-      });
+    //   var querySnapshot = await getDocs(collection(db, "electronics"));
+    //   querySnapshot.forEach((doc) => {
+    //     getElectronics.push({...doc.data(), key: doc.id});
+    //   });
   
-      var querySnapshot = await getDocs(collection(db, "furniture"));
-      querySnapshot.forEach((doc) => {
-        getFurniture.push({...doc.data(), key: doc.id});
-      });
+    //   var querySnapshot = await getDocs(collection(db, "furniture"));
+    //   querySnapshot.forEach((doc) => {
+    //     getFurniture.push({...doc.data(), key: doc.id});
+    //   });
   
-      var querySnapshot = await getDocs(collection(db, "appliances"));
-      querySnapshot.forEach((doc) => {
-        getAppliances.push({...doc.data(), key: doc.id});
-      });
+    //   var querySnapshot = await getDocs(collection(db, "appliances"));
+    //   querySnapshot.forEach((doc) => {
+    //     getAppliances.push({...doc.data(), key: doc.id});
+    //   });
   
-      setTextbookPosts(getTextbooks);
-      setApartmentPosts(getApartments);
-      setElectronicPosts(getElectronics);
-      setFurniturePosts(getFurniture);
-      setAppliancePosts(getAppliances);
-    }
+    //   setTextbookPosts(getTextbooks);
+    //   setApartmentPosts(getApartments);
+    //   setElectronicPosts(getElectronics);
+    //   setFurniturePosts(getFurniture);
+    //   setAppliancePosts(getAppliances);
+    // }
 
 
 
@@ -111,7 +111,7 @@ const Account = () => {
                     </VStack>
                 </HStack>
 
-                <Heading as={'h2'} 
+                {/* <Heading as={'h2'}       THIS IS FOR ADDING LISTINGS TO THE ACCOUNT PAGE NON-OPERATIONAL
             size={'lg'} 
             colorScheme="green" 
             m={2} 
@@ -127,7 +127,7 @@ const Account = () => {
                 {appliancePosts.length > 0 ? (appliancePosts.map((post) => 
                 <ApplianceProductCard electronic={post}></ApplianceProductCard>)) : <h1>No Appliances</h1>}
               </HStack>
-            </Box>
+            </Box> */}
 
         </div>
     );
