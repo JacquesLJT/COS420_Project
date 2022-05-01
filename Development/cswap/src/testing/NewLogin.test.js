@@ -22,3 +22,8 @@ it("Facebook Sign In", () => {
     fireEvent.click(getByTestId("facebook-signin"));
     expect(onFacebookSignIn).toHaveBeenCalled();
     });
+
+  it("Logout undifined", () => {
+    const logout = NewLogin.logout;
+    expect(logout).toBeUndefined();
+  });

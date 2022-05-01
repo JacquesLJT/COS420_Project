@@ -16,3 +16,8 @@ test("Render Home", () => {
     expect(Furniture).toBeInTheDocument();
     expect(Appliances).toBeInTheDocument();
 });
+
+test("Logout undifined", () => {
+    const logout = Home.logout;
+    expect(logout).toBeUndefined();
+});

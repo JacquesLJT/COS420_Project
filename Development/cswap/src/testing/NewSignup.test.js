@@ -14,3 +14,8 @@ test("Render NewSignup", () => {
     expect(ConfirmPassword).toBeInTheDocument();
     expect(SignUp).toBeInTheDocument();
 });
+
+test("Logout undifined", () => {
+    const logout = NewSignup.logout;
+    expect(logout).toBeUndefined();
+});
