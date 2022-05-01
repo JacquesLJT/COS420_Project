@@ -7,3 +7,6 @@ Current Version 1.1
 Features: 
     User can signup with email and a password or use a third party account from Google or Facebook.
     User can then log into their CSwap account and once logged in can log out.
+    User can view listings on the home, textbooks, apartments, electronics, appliances, and furniture pages.
+    User can navigate to the create listing page, select the proper listing type, enter information about listing and create the listing.
+    
